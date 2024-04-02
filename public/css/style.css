@@ -1,58 +1,402 @@
-.bg-image-container {
-  position: relative;
-  height: 100vh; /* Ensure the container has height */
-  overflow: hidden;
+/* Reset some basic elements */
+body, h1, h2, h3, p, figure, blockquote, dl, dd {
+    margin: 0;
+    padding: 0;
 }
 
-.bg-image {
-  background-color: red; /* Fallback color */
-  background-size: cover;
-  background-position: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  animation: imageFade 15s infinite;
+body {
+    font-family: Arial, sans-serif;
 }
 
-.image1 { background-image: url('../images/farm.jpg'); }
-.image2 { background-image: url('../images/333.jpg'); animation-delay: 5s; }
-.image3 { background-image: url('../images/444.jpg'); animation-delay: 10s; }
-
-@keyframes imageFade {
-  0% { opacity: 0; }
-  5% { opacity: 1; }
-  33.33% { opacity: 1; }
-  38.33% { opacity: 0; }
-  100% { opacity: 0; }
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    height: 80px;
 }
 
-  
-  .login {
-    min-height: 100vh;
-  }
-  
-  .bg-light {
-    background-color: #f8f9fa!important;
-  }
-  
-  /* Add some padding and shadow to form elements */
-  .form-control {
-    border-radius: 0.375rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  }
-  
-  .btn-primary {
-    border-radius: 0.375rem;
+.logo {
+    color: white;
+    font-size: 24px;
+}
+
+.nav-links {
+    display: flex;
+    
+}
+
+/* General styles for the navigation bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #396A85; /* Example background color, adjust as needed */
+    padding: 10px 20px; /* Adds padding inside the navigation bar */
+    color: white;
+}
+
+.logo {
+    font-size: 24px; /* Example size, adjust as needed */
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px; /* Adjust the space between the nav items */
+}
+
+.nav-item {
+    text-decoration: none; /* Removes the underline from links */
+    color: white; /* Sets text color */
+    background-color: #007bff; /* Example button color, adjust as needed */
+    padding: 10px 20px; /* Adjust the padding to control the size of the buttons */
+    border-radius: 5px; /* Rounds the corners of the buttons */
+    transition: background-color 0.3s; /* Smooth background color transition for hover effect */
+}
+
+.nav-item:hover {
+    background-color: #0056b3; /* Darkens the button on hover, adjust color as needed */
+}
+
+/* Specific styles for the second button to make it outlined */
+.nav-item:nth-child(2) {
+    background-color: transparent; /* Makes the background transparent */
+    border: 2px solid #007bff; /* Adds a border with the color of the first button */
+    color: #007bff; /* Adjust text color to match the border */
+}
+
+.nav-item:nth-child(2):hover {
+    background-color: #007bff; /* Fills the button with color on hover */
+    color: white; /* Changes the text color to white on hover */
+}
+
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 0 15px;
+}
+
+.nav-item:hover {
+    text-decoration: underline;
+}
+
+.slider {
+    position: relative;
+    max-width: 700px;
+    margin: 20px auto;
+    
+}
+
+.slide {
+    display: none;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
     border: none;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+/* Display the first slide by default */
+#slide1 {
+    display: block;
+}
+
+
+body, h2, figure, blockquote, dl, dd {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    font-size: 24px;
+    text-align: center;
+    margin: 20px 0;
+}
+.categories {
+    text-align: center;
+    margin: 20px;
   }
   
-  /* Customize the appearance of the checkbox */
-  .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-    color: #fff;
-    border-color: #007bff;
-    background-color: #007bff;
+  .categories h2 {
+    margin-bottom: 20px;
   }
   
+  .cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adjust the gap to control the overlapping */
+  }
+  
+  .card {
+    width: calc(25% + 30px); /* Increase width to overlap */
+    height: calc(300px + 30px); /* Increase height to overlap */
+    position: relative; /* Needed to position the span absolutely */
+    overflow: hidden; /* Keeps the content from spilling out */
+    border-radius: 10px; /* Optional for rounded corners */
+  }
+  
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the area of the card without stretching */
+    object-position: center; /* Center the image within the card */
+  }
+  
+  
+  .card span {
+    position: absolute;
+    bottom: 10px; /* Adjust to position the span at the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Center the span */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: rgb(6, 75, 116);
+    padding: 5px 20px;
+    border-radius: 20px;
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .card:hover img {
+    transform: scale(1.1); /* Slightly zoom in the image on hover */
+  }
+  
+  .card:hover span {
+    transform: translateX(-50%) scale(0.8); /* Slightly shrink the span on hover */
+  }
+  
+
+  
+.card span {
+    padding: 5px 0; /* Reduces padding above and below the text for closeness */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Scales up the card on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adds shadow for depth */
+}
+
+
+.card span {
+    padding: 10px 0; /* Adds padding above and below the text */
+}
+
+/* Targeting the <span> inside the .fantasy card specifically */
+.card.fantasy span {
+    background-color: #003366; /* Dark blue background */
+    color: rgb(3, 97, 92); /* Ensures the text is white for better contrast */
+    padding: 10px 10px; /* Adds padding inside the span to give it a button-like appearance */
+    border-radius: 5px; /* Rounds the corners of the button */
+    cursor: pointer; /* Changes the cursor to indicate the element is clickable */
+    display: inline-block; /* Changes the display to inline-block to allow padding */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+   
+    border-radius: 20px;
+}
+
+.card.fantasy span:hover {
+    background-color: #87CEEB; /* Changes to sky blue on hover */
+}
+
+/* Targeting the <span> inside the .fantasy card specifically */
+.card.gossip span {
+    background-color: #003366; /* Dark blue background */
+    color: #fff; /* Ensures the text is white for better contrast */
+    padding: 10px 20px; /* Adds padding inside the span to give it a button-like appearance */
+    border-radius: 5px; /* Rounds the corners of the button */
+    cursor: pointer; /* Changes the cursor to indicate the element is clickable */
+    display: inline-block; /* Changes the display to inline-block to allow padding */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    border-radius: 20px;
+}
+
+.card.gossip span:hover {
+    background-color: #87CEEB; /* Changes to sky blue on hover */
+}
+
+
+/* Targeting the <span> inside the .fantasy card specifically */
+.card.festival span {
+    background-color: #003366; /* Dark blue background */
+    color: #fff; /* Ensures the text is white for better contrast */
+    padding: 10px 20px; /* Adds padding inside the span to give it a button-like appearance */
+    border-radius: 5px; /* Rounds the corners of the button */
+    cursor: pointer; /* Changes the cursor to indicate the element is clickable */
+    display: inline-block; /* Changes the display to inline-block to allow padding */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    border-radius: 20px;
+}
+
+.card.festival span:hover {
+    background-color: #87CEEB; /* Changes to sky blue on hover */
+}
+
+
+/* Targeting the <span> inside the .fantasy card specifically */
+.card.concert span {
+    background-color: #396A85; /* Dark blue background */
+    color: #fff; /* Ensures the text is white for better contrast */
+    padding: 10px 20px; /* Adds padding inside the span to give it a button-like appearance */
+    border-radius: 5px; /* Rounds the corners of the button */
+    cursor: pointer; /* Changes the cursor to indicate the element is clickable */
+    display: inline-block; /* Changes the display to inline-block to allow padding */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    border-radius: 20px;
+}
+
+.card.fantasy span:hover {
+    background-color: #87CEEB; /* Changes to sky blue on hover */
+}
+
+.card span {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.footer-content {
+    background-color: #396A85;
+    color: rgb(10, 116, 143);
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.footer-logo {
+    font-size: 48px;
+    line-height: 1;
+}
+
+.footer-links {
+    display: flex;
+}
+
+.link-column {
+    margin: 0 20px;
+}
+
+.link-column strong {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.link-column a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 5px 0;
+}
+
+.link-column a:hover {
+    text-decoration: underline;
+}
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .signup-form, .side-image {
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .signup-form {
+    background-color: #ffffff;
+    padding: 2em;
+    max-width: 500px;
+    width: 100%;
+    box-sizing: border-box;
+    border-top-left-radius: 20px; /* adjust the pixel value to your preference */
+    border-bottom-left-radius: 20px; /* adjust the pixel value to your preference */
+  }
+  
+  
+  .signup-form h2 {
+    color: #333;
+  }
+  
+  .signup-form input[type="text"],
+  .signup-form input[type="email"],
+  .signup-form input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .signup-form .terms {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+  
+  .signup-form .terms input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  .signup-form button {
+    padding: 10px;
+    width: 100%;
+    border: none;
+    background-color: #0056b3;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .signup-form button:hover {
+    background-color: #003366;
+  }
+  
+  .signup-form p {
+    text-align: center;
+  }
+  
+  .side-image img {
+    max-width: 100%;
+    height: 430px;
+    display: block; /* This ensures that there's no extra space under the image */
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    .signup-form, .side-image {
+      flex-basis: 100%;
+    }
+  }
+  
+
+
