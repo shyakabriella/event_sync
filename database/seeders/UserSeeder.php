@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
             'email' => 'artistperformer@example.com',
             'password' => Hash::make('password'), 
         ]);
+        
         $artistPerformer->assignRole('Artist and Performer');
 
         $venueOwner = User::create([

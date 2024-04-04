@@ -17,12 +17,14 @@
 			<h1>Event_Sync</h1>
 			<img class="logo" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4cfdcb5a-0137-4457-8be1-6e7bd1f29ebb" alt="" />
 			<ul>
+
+	
 			<li class="nav-item">
-        <a href="{{ route('home') }}">
-            <i class="fa fa-house nav-icon"></i>
-            <span class="nav-text">Dashboard</span>
-        </a>
-    </li>
+                <a href="{{ route('dashboard.event-organizer') }}">
+				<i class="fas fa-tachometer-alt nav-icon"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </li>
     
     <!-- Event Organizers -->
     <li class="nav-item">
@@ -38,12 +40,14 @@
             <span class="nav-text">Manage Events</span>
         </a>
     </li>
+
     <li class="nav-item">
         <a href="{{ route('artists.index') }}">
             <i class="fa fa-microphone nav-icon"></i>
             <span class="nav-text">Add_Artist</span>
         </a>
     </li>
+
     <li class="nav-item">
         <a href="{{ route('venues.index') }}">
             <i class="fa fa-building nav-icon"></i>
@@ -116,11 +120,11 @@
             <i class="fa fa-sign-out-alt nav-icon"></i>
             <span class="nav-text">Log Out</span>
         </a>
+
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
-    </li>
-                
+    </li>        
 			</ul>
 		</nav>
 
@@ -229,9 +233,9 @@
 						</div>
 					</div>
 
-							@endforeach
+				@endforeach
 							
-						</div>
+			</div>
 
 						<div class="pagination-wrapper">
 							{{ $events->links('pagination::bootstrap-5') }} {{-- Use this for Bootstrap 5 --}}

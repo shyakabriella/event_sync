@@ -35,19 +35,31 @@ class EventController extends Controller
         return view('events.create');
     }
 
-    public function assignArtist(Request $request, Event $event)
-{
-    $validated = $request->validate([
-        'artist_id.*' => 'required|exists:artists,id',
-    ]);
+    public function assignArtist(Request $request, $eventId)
+    {
+        $artistIds = $request->input('artist_id');
+        $event = Event::find($eventId);
+        $events = Event::with('artists')->orderBy('date', 'ASC')->paginate(3);
+        $existingArtistIds = $event->artists->pluck('id')->toArray();
 
-    // Sync the selected artists with the event
-    $event->artists()->sync($validated['artist_id']);
+        $newArtistIds = [];
+        foreach ($artistIds as $artistId) {
+            if (!in_array($artistId, $existingArtistIds)) {
+                $newArtistIds[] = $artistId;
+            }
+        }
 
-    return back()->with('success', 'Artists assigned successfully to the event.');
-}
+        if (empty($newArtistIds)) {
+            return redirect()->back()->with('warning', 'All selected artists are already assigned to this event.');
+        }
 
+        $event->artists()->attach($newArtistIds);
 
+        return redirect()->back()->with('success', 'Artists assigned to event successfully.');
+    }
+
+    
+    
 public function store(Request $request): RedirectResponse
 {
     $request->validate([

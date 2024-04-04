@@ -10,10 +10,15 @@ class Event extends Model
         'name', 'date', 'location', 'description', 'capacity', 'event_type', 'image',
     ];
 
-    public function tickets()
-{
-    return $this->hasMany(Ticket::class);
-}
+    public function artists()
+    {
+        return $this->belongsToMany(Artist::class, 'artist_event', 'event_id', 'artist_id');
+    }
+    
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
     
 }

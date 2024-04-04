@@ -10,6 +10,10 @@ class Artist extends Model
         'name', 'genre', 'bio', 'contact_info', 'social_media', 'image', 'website', 'performance_requirements', 'availability', 'past_performances', 'email',
     ];
 
-   
+    public function events()
+{
+    return $this->belongsToMany(Event::class, 'artist_event', 'artist_id', 'event_id');
+}
+ 
 }
 

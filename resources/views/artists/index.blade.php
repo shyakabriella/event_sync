@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/admin.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <title>Event_Sync | auca</title>
@@ -22,8 +21,8 @@
 			<img class="logo" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4cfdcb5a-0137-4457-8be1-6e7bd1f29ebb" alt="" />
 			<ul>
 			<li class="nav-item">
-        <a href="{{ route('home') }}">
-            <i class="fa fa-house nav-icon"></i>
+      <a href="{{ route('dashboard.event_organizer') }}">
+      <i class="fas fa-tachometer-alt nav-icon"></i>
             <span class="nav-text">Dashboard</span>
         </a>
     </li>
@@ -54,12 +53,7 @@
             <span class="nav-text">Venue</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a href="{{ route('analytics.index') }}">
-            <i class="fa fa-chart-line nav-icon"></i>
-            <span class="nav-text">Event Analytics</span>
-        </a>
-    </li>
+   
     <li class="nav-item">
         <a href="{{ route('finances.index') }}">
             <i class="fa fa-wallet nav-icon"></i>
@@ -67,12 +61,7 @@
         </a>
     </li>
 
-    <li class="nav-item">
-        <a href="">
-            <i class="fa fa-sliders nav-icon"></i>
-            <span class="nav-text">Settings</span>
-        </a>
-    </li>
+   
 
 
 <div class="container">

@@ -22,8 +22,8 @@
 			<img class="logo" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4cfdcb5a-0137-4457-8be1-6e7bd1f29ebb" alt="" />
 			<ul>
 			<li class="nav-item">
-        <a href="{{ route('home') }}">
-            <i class="fa fa-house nav-icon"></i>
+            <a href="{{ route('dashboard.event-organizer') }}">
+        <i class="fas fa-tachometer-alt nav-icon"></i>
             <span class="nav-text">Dashboard</span>
         </a>
     </li>

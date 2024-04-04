@@ -27,8 +27,8 @@
 			<img class="logo" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4cfdcb5a-0137-4457-8be1-6e7bd1f29ebb" alt="" />
 			<ul>
 			<li class="nav-item">
-        <a href="{{ route('home') }}">
-            <i class="fa fa-house nav-icon"></i>
+        <a href="{{ route('dashboard.event-organizer') }}">
+        <i class="fas fa-tachometer-alt nav-icon"></i>
             <span class="nav-text">Dashboard</span>
         </a>
     </li>
@@ -66,8 +66,6 @@
             <span class="nav-text">Financial</span>
         </a>
     </li>
-
-   
 
 
 <div class="container">
@@ -184,6 +182,18 @@
 					</div>
                     
                 <h2>Lets Manage Event</h2>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('warning'))
+                    <div class="alert alert-warning">
+                        {{ session('warning') }}
+                    </div>
+                @endif
+
 
 				</div>
                 <div class="container">
@@ -193,7 +203,6 @@
                         <th style="color:black;">Event Name</th>
                         <th style="color:black;">Location</th>
                         <th style="color:black;">Add_Artist</th>
-                        <th style="color:black;">Add_Venues</th>
                         <th style="color:black;">Date</th>
                         <th style="color:black;">Action</th>
                     </tr>
@@ -203,7 +212,6 @@
                 <tr>
                     <td>{{ $event->name }}</td>
                     <td>{{ $event->location }}</td>
-
         <td>
     
             <a href="#!" class="btn btn-success btn-sm" data-toggle="modal" data-target="#artistListModal{{$event->id}}">
@@ -217,31 +225,28 @@
             </span>
         </td>
 
-                <td>
-                    <span id="selectedVenue{{ $event->id }}"></span>
-                    <a href="#!" class="btn btn-info btn-sm" data-toggle="modal" data-target="#venueListModal{{$event->id}}">
-                        <i class="fas fa-plus"></i>
-                    </a>
-                </td>
+                
             <td>{{ $event->date }}</td>
             <td>
-                <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary">Edit</a>
-                <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display:inline;">
+                <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary">Publish</a>
+                <!-- <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                </form> -->
             </td>
         </tr>
         @endforeach
 
     </tbody>
 </table>
+
+
+             
               
 </div>
          
-<!-- Include jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 @foreach ($events as $event)
 <!-- Modal for each event -->
@@ -254,32 +259,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="artistForm{{ $event->id }}" action="{{ route('events.assignArtist', $event->id) }}" method="POST">
+            <form action="{{ route('events.assignArtist', $event->id) }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     @foreach ($artists as $artist)
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="artist_id[]" id="artist{{ $artist->id }}" value="{{ $artist->id }}" onclick="updateSelectedArtists({{ $event->id }}, {{ $artist->id }}, '{{ $artist->name }}')">
+                        <input class="form-check-input" type="checkbox" name="artist_id[]" id="artist{{ $artist->id }}" value="{{ $artist->id }}">
                         <label class="form-check-label" for="artist{{ $artist->id }}">
                             {{ $artist->name }}
                         </label>
                     </div>
                     @endforeach
-                    <hr>
-                    <h5>Selected Artists:</h5>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Artist Name</th>
-                            </tr>
-                        </thead>
-                        <tbody id="selectedArtistsTable{{ $event->id }}">
-                            <!-- Selected artists will be listed here -->
-                        </tbody>
-                    </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="addSelectedArtists({{ $event->id }})">Add</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </form>
@@ -287,6 +280,9 @@
     </div>
 </div>
 @endforeach
+
+
+
 
 <script>
     let selectedArtists = [];
@@ -346,10 +342,6 @@
     
 </script>
 
-
-
-
-
 			</div>
 			<div class="right-content">
 				<div class="user-info">
@@ -377,43 +369,41 @@
 					</div>
 				</div>
 
-				<div class="mobile-personal-bests">
-					<h1>Personal Bests</h1>
-					<div class="personal-bests-container">
-						<div class="best-item box-one">
-							<p>Fastest 5K Run: 22min</p>
-							<img src="" alt="" />
-						</div>
-						<div class="best-item box-two">
-							<p>Longest Distance Cycling: 4 miles</p>
-							<img src="" alt="" />
-						</div>
-						<div class="best-item box-three">
-							<p>Longest Roller-Skating: 2 hours</p>
-							<img src="" alt="" />
-						</div>
-					</div>
-				</div>
+				
 
 				<div class="friends-activity">
 					<h1>Friends Activity</h1>
 					<div class="card-container">
 						<div class="card">
 							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Jane</h2>
+								<h2>Artist/Event</h2>
 							</div>
-							<img class="card-img" src="" alt="" />
-							<p>We completed the 30-Day Running Streak Challenge!🏃‍♀️🎉</p>
-						</div>
+							
 
-						<div class="card card-two">
-							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Mike</h2>
-							</div>
-							<img class="card-img" src="" alt="" />
-							<p>I just set a new record in cycling: 30 miles!💪</p>
+
+                            <div class="calendar">
+                                @foreach ($events as $event)
+                                    <div class="day-and-activity activity-one">
+                                        <div class="day">
+                                            <h1>{{ \Carbon\Carbon::parse($event->date)->format('d') }}</h1>
+                                            <p>{{ \Carbon\Carbon::parse($event->date)->format('D') }}</p>
+                                        </div>
+                                        <div class="activity">
+                                            <h2>{{ $event->name }}</h2>
+                                            <div class="participants">
+                                                @foreach ($event->artists as $artist)
+                                                    <span>{{ $artist->name }}</span>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <button class="btn">Invite</button>
+                                    </div>
+                                @endforeach
+                            </div>
+
+					
+					
+
 						</div>
 					</div>
 				</div>
@@ -430,21 +420,21 @@
 </div>
 
 <script>
-const rows = Array.from(document.querySelectorAll('tr'));
+    const rows = Array.from(document.querySelectorAll('tr'));
 
-function slideOut(row) {
-  row.classList.add('slide-out');
-}
+    function slideOut(row) {
+    row.classList.add('slide-out');
+    }
 
-function slideIn(row, index) {
-  setTimeout(function() {
-    row.classList.remove('slide-out');
-  }, (index + 5) * 200);  
-}
+    function slideIn(row, index) {
+    setTimeout(function() {
+        row.classList.remove('slide-out');
+    }, (index + 5) * 200);  
+    }
 
-rows.forEach(slideOut);
+    rows.forEach(slideOut);
 
-rows.forEach(slideIn);
+    rows.forEach(slideIn);
 </script>
 
 
@@ -463,7 +453,8 @@ rows.forEach(slideIn);
     }
 </script>
 
-
+<!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/orders.js"></script>
 <script src="/js/script.js"></script>
 

@@ -60,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/venue-owner', [DashboardController::class, 'venueOwner'])->name('dashboard.venue_owner');
     Route::get('/dashboard/event-organizer', [DashboardController::class, 'eventOrganizer'])->name('dashboard.event-organizer');
     // Add this route in your web.php file
+    Route::get('/dashboard/event-organizer', [DashboardController::class, 'eventOrganizer'])->name('dashboard.event-organizer');
+
 
     // web.php
 
