@@ -6,24 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Event;
 use App\Models\Venue;
+use App\Models\VenueRequest; // Import the VenueRequest model
 
 class BookingController extends Controller
 {
     public function index()
-    {
-        // Fetch bookings with event and venue details
-        $bookings = Booking::with('event', 'venue')->get();
-        $events = Event::with('artists')->get();
-        // Return the view with the bookings data
-        return view('bookings.index', compact('bookings','events'));
+    {   
+        $venues = Venue::latest()->paginate(10);
+        $bookings = Booking::latest()->paginate(10);
+        $events = Event::latest()->paginate(10);
+        $venueRequests = VenueRequest::latest()->paginate(10); // Fetch venue requests
+
+        return view('bookings.index', compact('venues', 'bookings', 'events', 'venueRequests'));
     }
-
-    public function countNewBookings()
-    {
-        // Assuming you have a 'status' column in your bookings table to indicate new bookings
-        $newBookingsCount = Booking::where('status', 'new')->count();
-        return $newBookingsCount;
-    }
-
-
 }

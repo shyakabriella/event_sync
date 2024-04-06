@@ -17,6 +17,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\VenueRequestController;
 
 
   
@@ -63,9 +64,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/event-organizer', [DashboardController::class, 'eventOrganizer'])->name('dashboard.event-organizer');
     // Add this route in your web.php file
     Route::get('/dashboard/event-organizer', [DashboardController::class, 'eventOrganizer'])->name('dashboard.event-organizer');
+    Route::post('/venue-requests', [VenueRequestController::class, 'store'])->name('venue-requests.store');
 
     Route::post('/events/{event}/send-invitations', [EventController::class, 'sendInvitations'])->name('events.sendInvitations');
     Route::post('/venue-requests', [VenueController::class, 'storeRequest'])->name('venue-requests.store');
+    Route::post('/venue-requests/{id}/update-status', [VenueRequestController::class, 'updateStatus'])->name('venue-requests.update-status');
 
 Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
 Route::post('/events/{event}/assign-artist', [EventController::class, 'assignArtist'])->name('events.assignArtist');

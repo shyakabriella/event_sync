@@ -151,31 +151,52 @@
 						
 					</div>
 					<hr/>
-					<center><h4>All   Bookings</h4></center>
+					
+          <center><h4>Requested Venues</h4></center>
+<table class="table">
+    <thead>
+        <tr>
+            <th style="color:black">Date Requested</th>
+            <th style="color:black">Venue Name</th>
+            <th style="color:black">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse ($venueRequests as $request)
+            <tr>
+                <td>{{ $request->created_at->format('d M Y') }}</td>
+                <td>
+                    @if($request->venue)
+                        <a href="{{ route('venues.show', $request->venue->id) }}">
+                            {{ $request->venue->name }}
+                        </a>
+                    @else
+                        Venue not found
+                    @endif
+                </td>
+                <td>
+                  <form action="{{ route('venue-requests.update-status', $request->id) }}" method="POST">
+                      @csrf
+                      <input type="hidden" name="status" value="approved">
+                      <button type="submit" class="btn btn-success">Approve</button>
+                  </form>
+                  <form action="{{ route('venue-requests.update-status', $request->id) }}" method="POST">
+                      @csrf
+                      <input type="hidden" name="status" value="rejected">
+                      <button type="submit" class="btn btn-danger">Reject</button>
+                  </form>
+              </td>
 
-      <table class="table">
-          <thead>
-              <tr>
-                  <th style="color:black">Event Name</th>
-                  <th style="color:black">Venue Name</th>
-                  <th style="color:black">Location</th>
-                  <th style="color:black">Date</th>
-                  <th style="color:black">Status</th>
-              </tr>
-          </thead>
-          <tbody>
-     @foreach ($bookings as $booking)
-          <tr>
-              <td>{{ $booking->event ? $booking->event->name : 'Event not found' }}</td>
-              <td>{{ $booking->venue ? $booking->venue->name : 'Venue not found' }}</td>
-              <td>{{ $booking->venue ? $booking->venue->location : 'Location not found' }}</td>
-              <td>{{ $booking->event ? $booking->event->date : 'Date not found' }}</td>
-              <td>{{ $booking->status }}</td>
-          </tr>
-      @endforeach
+            </tr>
+        @empty
+            <tr>
+                <td colspan="3" class="text-center">No venue requests found</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
 
-          </tbody>
-      </table>
+
 
             
 

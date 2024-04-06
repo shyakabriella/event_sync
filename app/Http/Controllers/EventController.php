@@ -38,6 +38,12 @@ class EventController extends Controller
         return view('events.create');
     }
 
+
+    public function getEventDetails($eventId)
+    {
+        return Event::with('artists')->find($eventId);
+    }
+
     public function assignArtist(Request $request, $eventId)
     {
         $artistIds = $request->input('artist_id');

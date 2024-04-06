@@ -17,6 +17,11 @@ class VenueController extends Controller
         return view('venues.index', compact('venues'));
     }
 
+    public function getVenueDetails($venueId)
+    {
+        return Venue::find($venueId);
+    }
+
     public function create(): View
     {
         return view('venues.create');

@@ -12,8 +12,7 @@ class Booking extends Model
     protected $fillable = [
         'event_id',
         'venue_id',
-        'status',
-        // Add other relevant fields
+        'status',  
     ];
 
     public function event()
@@ -26,5 +25,5 @@ class Booking extends Model
         return $this->belongsTo(Venue::class);
     }
 
-    // Add other necessary methods and properties
+    
 }

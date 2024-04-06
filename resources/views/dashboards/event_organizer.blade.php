@@ -306,6 +306,7 @@
 					</div>
 				</div>
 
+
 				<div class="friends-activity">
 					<h1>Friends Activity</h1>
 					<div class="card-container">
@@ -331,25 +332,18 @@
 											</a>
 										@endif
 									</h2>
+									<div class="status">
+										@if($request->status == 'approved')
+											<span class="badge badge-success">Approved</span>
+										@else
+											<span class="badge badge-warning">Pending</span>
+										@endif
+									</div>
+								</div>
+							</div>
+						@endforeach
+					</div>
 
-
-
-                <div class="status">
-                    @if($request->status == 'approved')
-                        <span class="badge badge-success">Approved</span>
-                    @else
-                        <span class="badge badge-warning">Pending</span>
-                    @endif
-                </div>
-            </div>
-        </div>
-    @endforeach
-</div>
-
-
-
-
-						
 					</div>
 				</div>
 			</div>
