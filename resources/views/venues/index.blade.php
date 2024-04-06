@@ -177,15 +177,15 @@
 						</div>
 					</div>
                   
-    <div class="container">
-    <h1>Add Artist</h1>
-    <!-- Trigger/Add Venue Button -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addVenueModal">
-        Add Venue
-    </button>
+        <div class="container">
+        <h1>Add Artist</h1>
+        <!-- Trigger/Add Venue Button -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addVenueModal">
+            Add Venue
+        </button>
 
 
-    <table class="table table-hover">
+<table class="table table-hover">
     <thead class="thead-light">
         <tr>
             <th style="color:black">Name</th>
@@ -211,22 +211,18 @@
             <td>{{ $venue->availability_start }}</td>
             <td>{{ $venue->availability_end }}</td>
             <td>
-                <!-- Example Action Buttons -->
-                <a href="{{ route('venues.edit', $venue->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                <form action="{{ route('venues.destroy', $venue->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                </form>
+            <form action="{{ route('venue-requests.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="venue_id" value="{{ $venue->id }}">
+                <button type="submit" class="btn btn-sm btn-primary">Request</button>
+            </form>
+
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-
-
 </div>
-
 </div>
 
 <!-- Add Venue Modal -->
@@ -292,9 +288,6 @@
                 ], null, ['class' => 'form-control']) !!}
             </div>
         </div>
-
-            
-
             <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Availability Start:</strong>
@@ -363,10 +356,7 @@
     </div>
   </div>
 </div>
-
-
-
-            	
+      	
 		</div>
 			<div class="right-content">
 				<div class="user-info">
@@ -446,22 +436,17 @@
 
 </div>
 
-
 <script>
-$(document).ready(function() {
-  $('#addArtistForm').on('submit', function(e) {
-    e.preventDefault(); // Prevent actual form submission
-    // Example: alert or collect form data
-    alert("Form submitted! (Replace this alert with your form handling logic)");
-    // Here, you would typically gather the form data and send it to your server via AJAX
-    $('#addArtistModal').modal('hide'); // Hide the modal after submission
-  });
-});
+    $(document).ready(function() {
+    $('#addArtistForm').on('submit', function(e) {
+        e.preventDefault(); // Prevent actual form submission
+        // Example: alert or collect form data
+        alert("Form submitted! (Replace this alert with your form handling logic)");
+        // Here, you would typically gather the form data and send it to your server via AJAX
+        $('#addArtistModal').modal('hide'); // Hide the modal after submission
+    });
+    });
 </script>
-
-
-
-
 <script src="/orders.js"></script>
 <script src="/js/script.js"></script>
 

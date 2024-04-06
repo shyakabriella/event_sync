@@ -21,7 +21,7 @@
 			<img class="logo" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4cfdcb5a-0137-4457-8be1-6e7bd1f29ebb" alt="" />
 			<ul>
 			<li class="nav-item">
-      <a href="{{ route('dashboard.event_organizer') }}">
+      <a href="{{ route('dashboard.event-organizer') }}">
       <i class="fas fa-tachometer-alt nav-icon"></i>
             <span class="nav-text">Dashboard</span>
         </a>
@@ -60,9 +60,6 @@
             <span class="nav-text">Financial</span>
         </a>
     </li>
-
-   
-
 
 <div class="container">
   
@@ -115,7 +112,6 @@
       </div>
     </div>
 </div>
-
 
     <li class="nav-item">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -183,9 +179,9 @@
     <!-- Trigger/Add Artist Button -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addArtistModal">
     Add Artist
-    </button>
+  </button>
 
-    <table class="table table-hover">
+  <table class="table table-hover">
     <thead class="thead-light">
         <tr>
             <th style="color:black">Name</th>
@@ -213,11 +209,9 @@
             <td>{{ $artist->past_performances }}</td>
         </tr>
         @endforeach
-    </tbody>
-</table>
-
-</div>
-
+     </tbody>
+  </table>
+ </div>
 </div>
 
 

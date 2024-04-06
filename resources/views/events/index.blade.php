@@ -239,15 +239,9 @@
         @endforeach
 
     </tbody>
-</table>
-
-
-             
-              
+</table>             
 </div>
-         
-
-
+        
 @foreach ($events as $event)
 <!-- Modal for each event -->
 <div class="modal fade" id="artistListModal{{ $event->id }}" tabindex="-1" role="dialog" aria-labelledby="artistListModalLabel{{ $event->id }}" aria-hidden="true">
@@ -381,25 +375,29 @@
 							
 
 
-                            <div class="calendar">
-                                @foreach ($events as $event)
-                                    <div class="day-and-activity activity-one">
-                                        <div class="day">
-                                            <h1>{{ \Carbon\Carbon::parse($event->date)->format('d') }}</h1>
-                                            <p>{{ \Carbon\Carbon::parse($event->date)->format('D') }}</p>
-                                        </div>
-                                        <div class="activity">
-                                            <h2>{{ $event->name }}</h2>
-                                            <div class="participants">
-                                                @foreach ($event->artists as $artist)
-                                                    <span>{{ $artist->name }}</span>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <button class="btn">Invite</button>
-                                    </div>
-                                @endforeach
-                            </div>
+ <div class="calendar">
+    @foreach ($events as $event)
+        <div class="day-and-activity activity-one">
+            <div class="day">
+                <h1>{{ \Carbon\Carbon::parse($event->date)->format('d') }}</h1>
+                <p>{{ \Carbon\Carbon::parse($event->date)->format('D') }}</p>
+            </div>
+            <div class="activity">
+                <h2>{{ $event->name }}</h2>
+                <div class="participants">
+                    @foreach ($event->artists as $artist)
+                        <span>{{ $artist->name }}</span>
+                    @endforeach
+                </div>
+            </div>
+            <form action="{{ route('events.sendInvitations', $event->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn">Invite</button>
+            </form>
+        </div>
+    @endforeach
+</div>
+
 
 					
 					

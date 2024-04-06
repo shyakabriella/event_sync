@@ -18,30 +18,28 @@
 			<img class="logo" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4cfdcb5a-0137-4457-8be1-6e7bd1f29ebb" alt="" />
 			<ul>
 			<li class="nav-item">
-        <a href="{{ route('home') }}">
-            <i class="fa fa-house nav-icon"></i>
+        <a href="{{ route('dashboard.artist') }}">
+        <i class="fas fa-tachometer-alt nav-icon"></i>
             <span class="nav-text">Dashboard</span>
         </a>
     </li>
     
      <!-- Artists and Performers -->
 	 <li class="nav-item">
-        <a href="">
+        <a href="{{ route('dashboard.artist') }}">
             <i class="fa fa-calendar-check nav-icon"></i>
             <span class="nav-text">All Events</span>
         </a>
     </li>
     <li class="nav-item">
-        <a href="">
-            <i class="fa fa-envelope-open-text nav-icon"></i>
-            <span class="nav-text">My Invitations</span>
-        </a>
+      <a href="{{ route('invitations.index') }}">
+          <i class="fa fa-envelope-open-text nav-icon"></i>
+          <span class="nav-text">My Invitations</span>
+      </a>
+
     </li>
 
-   
-   
-   
-
+  
 <div class="container">
   
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -161,33 +159,37 @@
 					<hr/>
 					<div class="container">
 
-				
-						<table>
-							<thead>
-								<tr>
-									<th>Event Name</th>
-									<th>Venue</th>
-									<th>Location</th>
-									<th>Artist</th>
-									<th>Date</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Concert</td>
-									<td>Main Hall</td>
-									<td>New York</td>
-									<td>John Doe</td>
-									<td>2024-04-15</td>
-									<td class="action-buttons">
-										<button class="approve">Approve</button>
-										<button class="reject">Reject</button>
-									</td>
-								</tr>
-							
-							</tbody>
-						</table>
+					<table>
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Venue</th>
+                    <th>Location</th>
+                    <th>Artist</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($events as $event)
+                    <tr>
+                        <td>{{ $event->name }}</td>
+                        <td>{{ $event->venue }}</td>
+                        <td>{{ $event->location }}</td>
+                        <td>
+                            @foreach ($event->artists as $artist)
+                                <span>{{ $artist->name }}</span>
+                            @endforeach
+                        </td>
+                        <td>{{ $event->date }}</td>
+                        <td class="action-buttons">
+                            <button class="approve">Join</button>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
 					</div>
 				</div>	
 			</div>
@@ -241,21 +243,32 @@
 					<div class="card-container">
 						<div class="card">
 							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Jane</h2>
+								
+								<h2>Event/Artist</h2>
 							</div>
-							<img class="card-img" src="" alt="" />
-							<p>We completed the 30-Day Running Streak Challenge!🏃‍♀️🎉</p>
+              
+							<div class="calendar">
+                                @foreach ($events as $event)
+                                    <div class="day-and-activity activity-one">
+                                        <div class="day">
+                                            <h1>{{ \Carbon\Carbon::parse($event->date)->format('d') }}</h1>
+                                            <p>{{ \Carbon\Carbon::parse($event->date)->format('D') }}</p>
+                                        </div>
+                                        <div class="activity">
+                                            <h2>{{ $event->name }}</h2>
+                                            <div class="participants">
+                                                @foreach ($event->artists as $artist)
+                                                    <span>{{ $artist->name }}</span>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <button class="btn">Invite</button>
+                                    </div>
+                                @endforeach
+                            </div>
 						</div>
 
-						<div class="card card-two">
-							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Mike</h2>
-							</div>
-							<img class="card-img" src="" alt="" />
-							<p>I just set a new record in cycling: 30 miles!💪</p>
-						</div>
+						
 					</div>
 				</div>
 			</div>

@@ -310,22 +310,46 @@
 					<h1>Friends Activity</h1>
 					<div class="card-container">
 						<div class="card">
-							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Jane</h2>
-							</div>
-							<img class="card-img" src="" alt="" />
-							<p>We completed the 30-Day Running Streak Challenge!🏃‍♀️🎉</p>
-						</div>
+						<h1>Requested Venue</h1>
 
-						<div class="card card-two">
-							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Mike</h2>
-							</div>
-							<img class="card-img" src="" alt="" />
-							<p>I just set a new record in cycling: 30 miles!💪</p>
-						</div>
+						<div class="calendar">
+							@foreach($venueRequests as $request)
+								<div class="day-and-activity activity-one">
+									<div class="day">
+										<h1>{{ $request->created_at->format('d') }}</h1>
+										<p>{{ $request->created_at->format('D') }}</p>
+									</div>
+									<div class="activity">
+									<h2>
+										@if($request->venue)
+											<a href="{{ route('venues.show', $request->venue->id) }}">
+												{{ $request->venue->name }}
+											</a>
+										@else
+											<a href="{{ route('venues.show', 1) }}">
+												Venue Name
+											</a>
+										@endif
+									</h2>
+
+
+
+                <div class="status">
+                    @if($request->status == 'approved')
+                        <span class="badge badge-success">Approved</span>
+                    @else
+                        <span class="badge badge-warning">Pending</span>
+                    @endif
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+
+
+
+
+						
 					</div>
 				</div>
 			</div>

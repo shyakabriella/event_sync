@@ -15,6 +15,8 @@ use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\PerformerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\BookingController;
 
 
   
@@ -62,12 +64,31 @@ Route::middleware(['auth'])->group(function () {
     // Add this route in your web.php file
     Route::get('/dashboard/event-organizer', [DashboardController::class, 'eventOrganizer'])->name('dashboard.event-organizer');
 
+    Route::post('/events/{event}/send-invitations', [EventController::class, 'sendInvitations'])->name('events.sendInvitations');
+    Route::post('/venue-requests', [VenueController::class, 'storeRequest'])->name('venue-requests.store');
 
-    // web.php
-
+Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
 Route::post('/events/{event}/assign-artist', [EventController::class, 'assignArtist'])->name('events.assignArtist');
 
+Route::get('/invitations', [InvitationController::class, 'index'])->name('invitations.index')->middleware('auth');
+Route::put('/invitations/{invitation}', [InvitationController::class, 'update'])->name('invitations.update');
 
+// Route to display the list of invitations
+Route::get('/invitations', [InvitationController::class, 'index'])->name('invitations.index');
+
+// Route to create a new invitation
+Route::get('/invitations/create', [InvitationController::class, 'create'])->name('invitations.create');
+Route::post('/invitations', [InvitationController::class, 'store'])->name('invitations.store');
+
+// Route to show a specific invitation
+Route::get('/invitations/{invitation}', [InvitationController::class, 'show'])->name('invitations.show');
+
+// Route to edit an invitation
+Route::get('/invitations/{invitation}/edit', [InvitationController::class, 'edit'])->name('invitations.edit');
+Route::put('/invitations/{invitation}', [InvitationController::class, 'update'])->name('invitations.update');
+
+// Route to delete an invitation
+Route::delete('/invitations/{invitation}', [InvitationController::class, 'destroy'])->name('invitations.destroy');
 
 
 });

@@ -23,28 +23,21 @@
             <span class="nav-text">Dashboard</span>
         </a>
     </li>
-
-	   <!-- Venue Owners/Managers -->
-	   <li class="nav-item">
+    
+       <!-- Venue Owners/Managers -->
+       <li class="nav-item">
         <a href="">
             <i class="fa fa-key nav-icon"></i>
             <span class="nav-text">My Venues</span>
         </a>
     </li>
-   
-    
     <li class="nav-item">
-        <a href="{{ route('booking.index') }}" class="d-flex align-items-center position-relative">
+        <a href="{{ route('booking.index') }}">
             <i class="fa fa-handshake nav-icon"></i>
             <span class="nav-text">Venue Bookings</span>
-            @if ($newBookingsCount > 0)
-                <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">
-                    {{ $newBookingsCount }}
-                </span>
-            @endif
         </a>
     </li>
- 
+
 <div class="container">
   
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -96,8 +89,6 @@
       </div>
     </div>
 </div>
-
-
     <li class="nav-item">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="fa fa-sign-out-alt nav-icon"></i>
@@ -160,44 +151,37 @@
 						
 					</div>
 					<hr/>
-					<center><h4>Venue Bookings</h4></center>
-					<hr/>
-					<div class="container">
+					<center><h4>All   Bookings</h4></center>
 
-					<table>
-            <thead>
-                <tr>
-                    <th>Event Name</th>
-                    <th>Venue</th>
-                    <th>Location</th>
-                    <th>Artist</th>
-                    <th>Date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($events as $event)
-                    <tr>
-                        <td>{{ $event->name }}</td>
-                        <td>{{ $event->venue }}</td>
-                        <td>{{ $event->location }}</td>
-                        <td>
-                            @foreach ($event->artists as $artist)
-                                <span>{{ $artist->name }}</span>
-                            @endforeach
-                        </td>
-                        <td>{{ $event->date }}</td>
-                        <td class="action-buttons">
-                            <button class="approve">Ask_To_Book</button>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-					
+      <table class="table">
+          <thead>
+              <tr>
+                  <th style="color:black">Event Name</th>
+                  <th style="color:black">Venue Name</th>
+                  <th style="color:black">Location</th>
+                  <th style="color:black">Date</th>
+                  <th style="color:black">Status</th>
+              </tr>
+          </thead>
+          <tbody>
+     @foreach ($bookings as $booking)
+          <tr>
+              <td>{{ $booking->event ? $booking->event->name : 'Event not found' }}</td>
+              <td>{{ $booking->venue ? $booking->venue->name : 'Venue not found' }}</td>
+              <td>{{ $booking->venue ? $booking->venue->location : 'Location not found' }}</td>
+              <td>{{ $booking->event ? $booking->event->date : 'Date not found' }}</td>
+              <td>{{ $booking->status }}</td>
+          </tr>
+      @endforeach
+
+          </tbody>
+      </table>
+
+            
+
 					</div>
 				</div>	
-			</div>
+	
 
 			<div class="right-content">
 				<div class="user-info">
@@ -248,15 +232,9 @@
 					<div class="card-container">
 						<div class="card">
 							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Jane</h2>
+								
+								<h2>Event/Artist</h2>
 							</div>
-							
-						</div>
-
-						<h2>Event/Artist</h2>
-							</div>
-              
 							<div class="calendar">
                                 @foreach ($events as $event)
                                     <div class="day-and-activity activity-one">
@@ -272,10 +250,10 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                
+                                        
                                     </div>
                                 @endforeach
-                            </div>
+                         </div>
 						</div>
 					</div>
 				</div>

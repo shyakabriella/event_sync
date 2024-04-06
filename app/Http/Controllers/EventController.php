@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\EventInvitation;
 
 class EventController extends Controller
 {
@@ -155,4 +158,24 @@ public function store(Request $request): RedirectResponse
 
         return redirect()->route('dashboard.event-organizer')->with('success', 'Event created successfully.');
     }
+
+
+
+    public function sendInvitations(Request $request, $eventId)
+    {
+        $event = Event::with('artists')->findOrFail($eventId);
+
+        foreach ($event->artists as $artist) {
+            Mail::to($artist->email)->send(new EventInvitation($event, $artist, [
+                'name' => 'Event_Sync',
+                'address' => 'info@eventsync.com',
+                'phone' => '0782667888',
+                'rsvpDeadline' => 'RSVP Deadline',
+            ]));
+        }
+        
+
+        return redirect()->back()->with('success', 'Invitations sent successfully.');
+    }
+
 }

@@ -18,33 +18,25 @@
 			<img class="logo" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/4cfdcb5a-0137-4457-8be1-6e7bd1f29ebb" alt="" />
 			<ul>
 			<li class="nav-item">
-        <a href="{{ route('dashboard.venue_owner') }}">
+        <a href="{{ route('dashboard.artist') }}">
         <i class="fas fa-tachometer-alt nav-icon"></i>
             <span class="nav-text">Dashboard</span>
         </a>
     </li>
-
-	   <!-- Venue Owners/Managers -->
-	   <li class="nav-item">
-        <a href="">
-            <i class="fa fa-key nav-icon"></i>
-            <span class="nav-text">My Venues</span>
-        </a>
-    </li>
-   
     
-    <li class="nav-item">
-        <a href="{{ route('booking.index') }}" class="d-flex align-items-center position-relative">
-            <i class="fa fa-handshake nav-icon"></i>
-            <span class="nav-text">Venue Bookings</span>
-            @if ($newBookingsCount > 0)
-                <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">
-                    {{ $newBookingsCount }}
-                </span>
-            @endif
+     <!-- Artists and Performers -->
+	 <li class="nav-item">
+        <a href="{{ route('dashboard.artist') }}">
+            <i class="fa fa-calendar-check nav-icon"></i>
+            <span class="nav-text">All Events</span>
         </a>
     </li>
- 
+    <li class="nav-item">
+      <a href="{{ route('invitations.index') }}">
+          <i class="fa fa-envelope-open-text nav-icon"></i>
+          <span class="nav-text">My Invitations</span>
+      </a>
+    </li>
 <div class="container">
   
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -96,8 +88,6 @@
       </div>
     </div>
 </div>
-
-
     <li class="nav-item">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="fa fa-sign-out-alt nav-icon"></i>
@@ -160,7 +150,7 @@
 						
 					</div>
 					<hr/>
-					<center><h4>Venue Bookings</h4></center>
+					<center><h4>All event and  Bookings</h4></center>
 					<hr/>
 					<div class="container">
 
@@ -188,13 +178,14 @@
                         </td>
                         <td>{{ $event->date }}</td>
                         <td class="action-buttons">
-                            <button class="approve">Ask_To_Book</button>
+                            <button class="approve">Accept</button>
+                            <button class="approve">Reject</button>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-					
+
 					</div>
 				</div>	
 			</div>
@@ -248,15 +239,9 @@
 					<div class="card-container">
 						<div class="card">
 							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Jane</h2>
+								
+								<h2>Event/Artist</h2>
 							</div>
-							
-						</div>
-
-						<h2>Event/Artist</h2>
-							</div>
-              
 							<div class="calendar">
                                 @foreach ($events as $event)
                                     <div class="day-and-activity activity-one">
@@ -272,10 +257,10 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                
+                                        
                                     </div>
                                 @endforeach
-                            </div>
+                         </div>
 						</div>
 					</div>
 				</div>

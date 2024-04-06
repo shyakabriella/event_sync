@@ -182,56 +182,49 @@
 					</div>
                     <h1>Financial</h1>
     
-                    @foreach($events as $event)
-    <div class="row mb-3">
-        <!-- Event Card -->
-        <div class="col-md-6">
-            <div class="card">
-                <img src="{{ asset('images/homepage/' . $event->image) }}" class="card-img-top" alt="{{ $event->name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $event->name }}</h5>
-                    <!-- Trigger modal for creating a ticket for this event -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTicketModal" onclick="setEventId({{ $event->id }})">
-                        Create Ticket
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Aggregated Ticket Info for the Event -->
-        <div class="col-md-6">
-            <div class="d-flex flex-row flex-wrap">
-                @php
-                    $aggregatedTickets = $event->tickets->groupBy('seat_type')
-                        ->map(function ($tickets, $seat_type) {
-                            return [
-                                'seat_type' => $seat_type,
-                                'price' => $tickets->first()->price,
-                                'quantity' => $tickets->sum('quantity'),
-                                'quantity_booked' => $tickets->sum('quantity_booked'),
-                            ];
-                        });
-                @endphp
-                @foreach($aggregatedTickets as $ticket)
-                    <div class="card mb-2 me-2" onclick="handleTicketClick('{{ $ticket['seat_type'] }}')">
-                        <div class="card-body">
-                            <h6 class="card-title">{{ $ticket['seat_type'] }}</h6>
-                            <p class="card-text">Price: {{ number_format($ticket['price'], 2) }} Rwf</p>
-                            <p class="card-text">Available Seats: {{ $ticket['quantity'] }}</p>
-                            <p class="card-text">Total Amount: {{ number_format($ticket['price'] * $ticket['quantity'], 2) }} Rwf</p>
+                        @foreach($events as $event)
+                        <div class="row mb-3">
+                            <!-- Event Card -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <img src="{{ asset('images/homepage/' . $event->image) }}" class="card-img-top" alt="{{ $event->name }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $event->name }}</h5>
+                                        <!-- Trigger modal for creating a ticket for this event -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTicketModal" onclick="setEventId({{ $event->id }})">
+                                            Create Ticket
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Aggregated Ticket Info for the Event -->
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row flex-wrap">
+                                    @php
+                                        $aggregatedTickets = $event->tickets->groupBy('seat_type')
+                                            ->map(function ($tickets, $seat_type) {
+                                                return [
+                                                    'seat_type' => $seat_type,
+                                                    'price' => $tickets->first()->price,
+                                                    'quantity' => $tickets->sum('quantity'),
+                                                    'quantity_booked' => $tickets->sum('quantity_booked'),
+                                                ];
+                                            });
+                                    @endphp
+                                    @foreach($aggregatedTickets as $ticket)
+                                        <div class="card mb-2 me-2" onclick="handleTicketClick('{{ $ticket['seat_type'] }}')">
+                                            <div class="card-body">
+                                                <h6 class="card-title">{{ $ticket['seat_type'] }}</h6>
+                                                <p class="card-text">Price: {{ number_format($ticket['price'], 2) }} Rwf</p>
+                                                <p class="card-text">Available Seats: {{ $ticket['quantity'] }}</p>
+                                                <p class="card-text">Total Amount: {{ number_format($ticket['price'] * $ticket['quantity'], 2) }} Rwf</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-@endforeach
-
-
-
-
-
-
-
+                    @endforeach
         
 				</div>
 			</div>

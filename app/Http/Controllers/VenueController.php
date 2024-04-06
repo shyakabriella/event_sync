@@ -6,6 +6,8 @@ use App\Models\Venue;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use App\Models\VenueRequest;
+
 
 class VenueController extends Controller
 {
@@ -95,4 +97,16 @@ class VenueController extends Controller
 
         return redirect()->route('venues.index')->with('success', 'Venue deleted successfully.');
     }
+
+    public function storeRequest(Request $request)
+{
+    $venueRequest = new VenueRequest();
+    $venueRequest->venue_id = $request->venue_id;
+    $venueRequest->user_id = auth()->id(); // Assuming the user is authenticated
+    $venueRequest->status = 'pending'; // Set the initial status
+    $venueRequest->save();
+
+    return back()->with('success', 'Venue request submitted successfully.');
+}
+
 }
