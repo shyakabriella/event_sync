@@ -91,8 +91,6 @@
       </div>
     </div>
 </div>
-
-
     <li class="nav-item">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="fa fa-sign-out-alt nav-icon"></i>
@@ -262,13 +260,10 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                        <button class="btn">Invite</button>
                                     </div>
                                 @endforeach
                             </div>
 						</div>
-
-						
 					</div>
 				</div>
 			</div>

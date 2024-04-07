@@ -113,8 +113,6 @@
       </div>
     </div>
 </div>
-
-
     <li class="nav-item">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="fa fa-sign-out-alt nav-icon"></i>
@@ -171,13 +169,13 @@
 						<div class="image-container img-six">
 							<img src="/images/ff.jpg" alt="swimming" />
 							<div class="overlay">
-								<h3>Swimming</h3>
+								<h3>CONCERT</h3>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				
+
 				<div class="left-bottom">
 					<div class="weekly-schedule">
 						<h1>Event List</h1>
@@ -233,8 +231,7 @@
 						</div>
 					</div>
 
-				@endforeach
-							
+				@endforeach			
 			</div>
 
 						<div class="pagination-wrapper">

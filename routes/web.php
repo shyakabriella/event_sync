@@ -62,13 +62,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/artist', [DashboardController::class, 'artist'])->name('dashboard.artist');
     Route::get('/dashboard/venue-owner', [DashboardController::class, 'venueOwner'])->name('dashboard.venue_owner');
     Route::get('/dashboard/event-organizer', [DashboardController::class, 'eventOrganizer'])->name('dashboard.event-organizer');
-    // Add this route in your web.php file
     Route::get('/dashboard/event-organizer', [DashboardController::class, 'eventOrganizer'])->name('dashboard.event-organizer');
     Route::post('/venue-requests', [VenueRequestController::class, 'store'])->name('venue-requests.store');
-
     Route::post('/events/{event}/send-invitations', [EventController::class, 'sendInvitations'])->name('events.sendInvitations');
     Route::post('/venue-requests', [VenueController::class, 'storeRequest'])->name('venue-requests.store');
     Route::post('/venue-requests/{id}/update-status', [VenueRequestController::class, 'updateStatus'])->name('venue-requests.update-status');
+    Route::get('/book-seat/{eventId}', [BookingController::class, 'showBookingForm'])->name('book-seat');
+    Route::post('/submit-booking', [BookingController::class, 'submitBooking'])->name('submit-booking');
+    Route::get('/bookings/payment', function () {
+      
+        return view('bookings.payment', compact('event'));
+    })->name('bookings.payment');
+    
+
+    Route::post('/submit-booking', [BookingController::class, 'submitBooking'])->name('submit-booking');
+
 
 Route::get('/bookings', [BookingController::class, 'index'])->name('booking.index');
 Route::post('/events/{event}/assign-artist', [EventController::class, 'assignArtist'])->name('events.assignArtist');

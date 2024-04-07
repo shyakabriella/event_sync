@@ -314,9 +314,7 @@
     </div>
   </div>
 </div>
-
-
-            	
+        	
 		</div>
 			<div class="right-content">
 				<div class="user-info">
@@ -389,28 +387,25 @@
 	</main>
 	
     <script>
-		var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
-		keyboard: true
-		})
+      var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+      keyboard: true
+      })
     </script>
 
 </div>
 
 
 <script>
-$(document).ready(function() {
-  $('#addArtistForm').on('submit', function(e) {
-    e.preventDefault(); // Prevent actual form submission
-    // Example: alert or collect form data
-    alert("Form submitted! (Replace this alert with your form handling logic)");
-    // Here, you would typically gather the form data and send it to your server via AJAX
-    $('#addArtistModal').modal('hide'); // Hide the modal after submission
+  $(document).ready(function() {
+    $('#addArtistForm').on('submit', function(e) {
+      e.preventDefault(); // Prevent actual form submission
+      // Example: alert or collect form data
+      alert("Form submitted! (Replace this alert with your form handling logic)");
+      // Here, you would typically gather the form data and send it to your server via AJAX
+      $('#addArtistModal').modal('hide'); // Hide the modal after submission
+    });
   });
-});
 </script>
-
-
-
 
 <script src="/orders.js"></script>
 <script src="/js/script.js"></script>

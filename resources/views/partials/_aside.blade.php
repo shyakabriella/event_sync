@@ -31,60 +31,9 @@
             <span class="nav-text">ArtManagement</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a href="{{ route('venues.index') }}">
-            <i class="fa fa-building nav-icon"></i>
-            <span class="nav-text">Venue</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{ route('analytics.index') }}">
-            <i class="fa fa-chart-line nav-icon"></i>
-            <span class="nav-text">Event Analytics</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{ route('finances.index') }}">
-            <i class="fa fa-wallet nav-icon"></i>
-            <span class="nav-text">Financial Overview</span>
-        </a>
-    </li>
-    
-    <!-- Artists and Performers -->
-    <li class="nav-item">
-        <a href="">
-            <i class="fa fa-calendar-check nav-icon"></i>
-            <span class="nav-text">My Bookings</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="">
-            <i class="fa fa-envelope-open-text nav-icon"></i>
-            <span class="nav-text">Event Invitations</span>
-        </a>
-    </li>
-    
-    <!-- Venue Owners/Managers -->
-    <li class="nav-item">
-        <a href="">
-            <i class="fa fa-key nav-icon"></i>
-            <span class="nav-text">My Venues</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="">
-            <i class="fa fa-handshake nav-icon"></i>
-            <span class="nav-text">Venue Bookings</span>
-        </a>
-    </li>
-    
-    <!-- General Settings & Log Out -->
-    <li class="nav-item">
-        <a href="">
-            <i class="fa fa-sliders nav-icon"></i>
-            <span class="nav-text">Settings</span>
-        </a>
-    </li>
+   
+
+  
     <li class="nav-item">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="fa fa-sign-out-alt nav-icon"></i>
@@ -104,44 +53,73 @@
 					<h1>Top Events</h1>
 					<div class="activity-container">
 						<div class="image-container img-one">
-							<img src="" alt="tennis" />
+							<img src="/images/ff.jpg" alt="tennis" />
 							<div class="overlay">
-								<h3>Tennis</h3>
+								<h3>KARAOKE</h3>
 							</div>
 						</div>
 
 						<div class="image-container img-two">
-							<img src="" alt="hiking" />
+							<img src="/images/1.jpg" alt="hiking" />
 							<div class="overlay">
-								<h3>Hiking</h3>
+								<h3>IGISOPE</h3>
 							</div>
 						</div>
 
-						<div class="image-container img-three">
-							<img src="" alt="running" />
-							<div class="overlay">
-								<h3>Running</h3>
-							</div>
+						<style>
+							.video-container {
+								position: relative;
+							}
+
+							.overlay {
+								position: absolute;
+								top: 0;
+								left: 0;
+								width: 100%;
+								height: 100%;
+								background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+								color: white;
+								display: flex;
+								flex-direction: column;
+								justify-content: center;
+								align-items: center;
+							}
+
+							.overlay h2,
+							.overlay p {
+								margin: 0;
+							}
+
+						</style>
+
+						<div class="video-container">
+							<video width="320" height="240" controls>
+								<source src="/video/shay.mp4" type="video/mp4">
+								Your browser does not support the video tag.
+							</video>
+							
 						</div>
+
+
 
 						<div class="image-container img-four">
-							<img src="" alt="cycling" />
+							<img src="/images/22.jpg" alt="cycling" />
 							<div class="overlay">
-								<h3>Cycling</h3>
+								<h3>Gospel</h3>
 							</div>
 						</div>
 
 						<div class="image-container img-five">
-							<img src="" alt="yoga" />
+							<img src="/images/45.webp" alt="yoga" />
 							<div class="overlay">
-								<h3>Yoga</h3>
+								<h3>Kinyarwanda</h3>
 							</div>
 						</div>
 
 						<div class="image-container img-six">
-							<img src="" alt="swimming" />
+							<img src="/images/f.webp" alt="swimming" />
 							<div class="overlay">
-								<h3>Swimming</h3>
+								<h3>New Concert</h3>
 							</div>
 						</div>
 					</div>
@@ -149,91 +127,60 @@
 
 				<div class="left-bottom">
 					<div class="weekly-schedule">
-						<h1>Weekly Schedule</h1>
-						<div class="calendar">
-							<div class="day-and-activity activity-one">
-								<div class="day">
-									<h1>13</h1>
-									<p>mon</p>
-								</div>
-								<div class="activity">
-									<h2>Swimming</h2>
-									<div class="participants">
-										<img src="" style="--i: 1" alt="" />
-										<img src="" style="--i: 2" alt="" />
-										<img src="" style="--i: 3" alt="" />
-										<img src="" style="--i: 4" alt="" />
-									</div>
-								</div>
-								<button class="btn">Join</button>
-							</div>
+						<h1>Book Your seat on event</h1>
+						
+						<div class="weekly-schedule">
+								@foreach ($events as $event)
+									<div class="day-and-activity activity-one">
+										<div class="day">
+											<h1>{{ \Carbon\Carbon::parse($event->date)->format('d') }}</h1>
+											<p>{{ \Carbon\Carbon::parse($event->date)->format('D') }}</p>
+										</div>
+										<div class="activity">
+											<h2>{{ $event->name }}</h2>
+											<div class="participants">
+												<img src="{{ asset('images/homepage/' . $event->image) }}" alt="Event Image">
+											</div>                                  
+										</div>
+										<div class="event-actions">
+										<button class="btn" onclick="window.location.href='{{ route('book-seat', $event->id) }}'">Book Seat</button>
 
-							<div class="day-and-activity activity-two">
-								<div class="day">
-									<h1>15</h1>
-									<p>wed</p>
-								</div>
-								<div class="activity">
-									<h2>Yoga</h2>
-									<div class="participants">
-										<img src="" style="--i: 1" alt="" />
-										<img src="" style="--i: 2" alt="" />
+											<div style="display: flex; flex-direction: column; align-items: center; margin-top: 5px;">
+											
+												
+											</div>
+										</div>
 									</div>
-								</div>
-								<button class="btn">Join</button>
-							</div>
-
-							<div class="day-and-activity activity-three">
-								<div class="day">
-									<h1>17</h1>
-									<p>fri</p>
-								</div>
-								<div class="activity">
-									<h2>Tennis</h2>
-									<div class="participants">
-										<img src="" style="--i: 1" alt="" />
-										<img src="" style="--i: 2" alt="" />
-										<img src="" style="--i: 3" alt="" />
-									</div>
-								</div>
-								<button class="btn">Join</button>
-							</div>
-
-							<div class="day-and-activity activity-four">
-								<div class="day">
-									<h1>18</h1>
-									<p>sat</p>
-								</div>
-								<div class="activity">
-									<h2>Hiking</h2>
-									<div class="participants">
-										<img src="" style="--i: 1" alt="" />
-										<img src="" style="--i: 2" alt="" />
-										<img src="" alt="" />
-										<img src="" style="--i: 4" alt="" />
-										<img src="" style="--i: 5" alt="" />
-									</div>
-								</div>
-								<button class="btn">Join</button>
-							</div>
+								@endforeach			
 						</div>
+
 					</div>
 
 					<div class="personal-bests">
-						<h1>Personal Bests</h1>
+						<h1>Event_Description</h1>
 						<div class="personal-bests-container">
-							<div class="best-item box-one">
-								<p>Fastest 5K Run: 22min</p>
-								<img src="" alt="" />
-							</div>
-							<div class="best-item box-two">
-								<p>Longest Distance Cycling: 4 miles</p>
-								<img src="" alt="" />
-							</div>
-							<div class="best-item box-three">
-								<p>Longest Roller-Skating: 2 hours</p>
-								<img src="" alt="" />
-							</div>
+						<table>
+							<thead>
+								<tr>
+									<th>Event Name</th>
+									<th>Artists</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($events as $event)
+									<tr>
+										<td>{{ $event->name }}</td>
+										<td>
+											@foreach ($event->artists as $artist)
+												<span>{{ $artist->name }}</span>{{ !$loop->last ? ', ' : '' }}
+											@endforeach
+										</td>
+									</tr>
+								@endforeach
+							</tbody>
+						</table>
+							
+							
 						</div>
 					</div>
 				</div>
@@ -288,20 +235,18 @@
 					<div class="card-container">
 						<div class="card">
 							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Jane</h2>
+								
 							</div>
-							<img class="card-img" src="" alt="" />
-							<p>We completed the 30-Day Running Streak Challenge!🏃‍♀️🎉</p>
+							<img class="card-img" src="/images/1.jpg" alt="" />
+							<p>Amazing Concert is comming🏃‍♀️🎉</p>
 						</div>
 
 						<div class="card card-two">
 							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Mike</h2>
+								
 							</div>
-							<img class="card-img" src="" alt="" />
-							<p>I just set a new record in cycling: 30 miles!💪</p>
+							<img class="card-img" src="/images/f.webp" alt="" />
+							<p>Super hit KARAOKE Coming soon💪</p>
 						</div>
 					</div>
 				</div>
