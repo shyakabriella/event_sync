@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use App\Models\Event; // Import the Event model
+use App\Models\Event; 
 use Spatie\Permission\Models\Role;
 
 class HomeController extends Controller
@@ -17,8 +17,8 @@ class HomeController extends Controller
     public function index()
     {
         $roles = Role::orderBy('id', 'DESC')->get();
-        $events = Event::all(); // Fetch all events
+        $events = Event::all(); 
 
-        return view('home', compact('roles', 'events')); // Pass events to the view
+        return view('home', compact('roles', 'events')); 
     }
 }

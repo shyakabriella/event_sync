@@ -167,89 +167,85 @@
 
 
 					
-				<div class="weekly-schedule">
-					<h1>Let's Get In Touch With You</h1>
-					<form id="multiStepForm" action="{{ route('submit-booking') }}" method="POST">
-						@csrf
-						<input type="hidden" name="event_id" value="{{ $event->id }}">
+		<div class="weekly-schedule">
+			<h1>Let's Get In Touch With You</h1>
+			<form id="multiStepForm" action="{{ route('submit-booking') }}" method="POST">
+				@csrf
+				<input type="hidden" name="event_id" value="{{ $event->id }}">
 
-						<!-- Step 1: Personal Details -->
-						<div class="form-step" id="step1">
-							<h2>Book Seat for {{ $event->name }}</h2>
-							<input type="text" name="name" placeholder="Your Name" required>
-							<input type="text" name="phone_number" placeholder="Phone Number" required>
-							<input type="email" name="email" placeholder="Email" required>
-							<input type="text" name="national_id" placeholder="National ID" required>
-							<select name="province" required>
-								<option value="">Select Province</option>
-								<option value="North">North</option>
-								<option value="South">South</option>
-								<option value="Western">Western</option>
-								<option value="Eastern">Eastern</option>
-								<option value="Kigali City">Kigali City</option>
-							</select>
-							<input type="text" name="district" placeholder="District" required>
-							<input type="text" name="sector" placeholder="Sector" required>
-							<button type="button" onclick="showStep(2)">Next</button>
-						</div>
-
-						<!-- Step 2: Event Details -->
-						<div class="form-step" id="step2" style="display: none;">
-							<h2>Event Details</h2>
-							<p>Description: {{ $event->description }}</p>
-							<p>Event name: {{ $event->name }}</p>
-							<p>event_Type: {{ $event->event_type }}</p>
-							<div class="ticket-info">
-								<p class="card-text">Price: <span id="ticketPrice">{{ number_format($ticket->price, 2) }}</span> Rwf</p>
-								<p class="card-text">Available Seats: {{ $ticket->quantity }}</p>
-								<label for="num_tickets">Number of Tickets:</label>
-								<input type="number" id="num_tickets" name="num_tickets" min="1" max="{{ $ticket->quantity }}" required onchange="calculateTotal()">
-								<br>
-								<p class="card-text">Total Amount: <span id="totalAmount">0.00</span> Rwf</p>
-							</div>
-							<select name="payment_option" required>
-								<option value="">Select Payment Option</option>
-								<option value="BK">BK</option>
-								<option value="Equity">Equity</option>
-								<option value="Mobile Money">Mobile Money</option>
-								<option value="Airtel Money">Airtel Money</option>
-							</select>
-							<br><br>
-							<button type="button" onclick="showStep(1)">Back</button><br><br>
-							<button type="submit" name="action" value="book_now">Book Now</button><br><br>
-							<button type="submit" name="action" value="pay_now">Pay Now</button>
-						</div>
-					</form>
+				<!-- Step 1: Personal Details -->
+				<div class="form-step" id="step1">
+					<h2>Book Seat for {{ $event->name }}</h2>
+					<input type="text" name="name" placeholder="Your Name" required>
+					<input type="text" name="phone_number" placeholder="Phone Number" required>
+					<input type="email" name="email" placeholder="Email" required>
+					<input type="text" name="national_id" placeholder="National ID" required>
+					<select name="province" required>
+						<option value="">Select Province</option>
+						<option value="North">North</option>
+						<option value="South">South</option>
+						<option value="Western">Western</option>
+						<option value="Eastern">Eastern</option>
+						<option value="Kigali City">Kigali City</option>
+					</select>
+					<input type="text" name="district" placeholder="District" required>
+					<input type="text" name="sector" placeholder="Sector" required>
+					<button type="button" onclick="showStep(2)">Next</button>
 				</div>
-			</div>
 
-				</div> 
-				<div class="left-bottom">
-
-			<div class="personal-bests">
-				<h1>Event_Description</h1>
-
-
-				<div class="personal-bests-container">
-				
-					
+				<!-- Step 2: Event Details -->
+				<div class="form-step" id="step2" style="display: none;">
+					<h2>Event Details</h2>
+					<p>Description: {{ $event->description }}</p>
+					<p>Event name: {{ $event->name }}</p>
+					<p>event_Type: {{ $event->event_type }}</p>
+					<div class="ticket-info">
+						<p class="card-text">Price: <span id="ticketPrice">{{ number_format($ticket->price, 2) }}</span> Rwf</p>
+						<p class="card-text">Available Seats: {{ $ticket->quantity }}</p>
+						<label for="num_tickets">Number of Tickets:</label>
+						<input type="number" id="num_tickets" name="num_tickets" min="1" max="{{ $ticket->quantity }}" required onchange="calculateTotal()">
+						<br>
+						<p class="card-text">Total Amount: <span id="totalAmount">0.00</span> Rwf</p>
+					</div>
+					<select name="payment_option" required>
+						<option value="">Select Payment Option</option>
+						<option value="BK">BK</option>
+						<option value="Equity">Equity</option>
+						<option value="Mobile Money">Mobile Money</option>
+						<option value="Airtel Money">Airtel Money</option>
+					</select>
+					<br><br>
+					<button type="button" onclick="showStep(1)">Back</button><br><br>
+					<button type="submit" name="action" value="book_now">Book Now</button><br><br>
+					<button type="submit" name="action" value="pay_now">Pay Now</button>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 
-	<div class="right-content">
-		<div class="user-info">
-			<div class="icon-container">
-				<i class="fa fa-bell nav-icon"></i>
-				<i class="fa fa-message nav-icon"></i>
-			</div>
-			<h4>{{ Auth::user()->name }}</h4>
-			<img src="" alt="" />
+		</div> 
+		<div class="left-bottom">
+
+	<div class="personal-bests">
+		<h1>Event_Description</h1>
+		<div class="personal-bests-container">
 		</div>
-
-
 	</div>
+</div>
+</div>
+
+<div class="right-content">
+<div class="user-info">
+	<div class="icon-container">
+		<i class="fa fa-bell nav-icon"></i>
+		<i class="fa fa-message nav-icon"></i>
+	</div>
+	<h4>{{ Auth::user()->name }}</h4>
+	<img src="" alt="" />
+</div>
+
+
+</div>
 </section>
 </main>
 
@@ -257,14 +253,14 @@
 <script>
 const navItems = document.querySelectorAll(".nav-item");
 
-	navItems.forEach((navItem, i) => {
-		navItem.addEventListener("click", () => {
-			navItems.forEach((item, j) => {
-				item.className = "nav-item";
-			});
-			navItem.className = "nav-item active";
-		});
+navItems.forEach((navItem, i) => {
+navItem.addEventListener("click", () => {
+	navItems.forEach((item, j) => {
+		item.className = "nav-item";
 	});
+	navItem.className = "nav-item active";
+});
+});
 
 </script>
 
@@ -282,7 +278,7 @@ function showStep(step) {
 // Hide all steps
 var steps = document.getElementsByClassName('form-step');
 for (var i = 0; i < steps.length; i++) {
-	steps[i].style.display = 'none';
+steps[i].style.display = 'none';
 }
 
 // Show the specified step
@@ -292,14 +288,14 @@ document.getElementById('step' + step).style.display = 'block';
 </script>
 
 <script>
-	function showStep(step) {
-    var steps = document.getElementsByClassName('form-step');
-    for (var i = 0; i < steps.length; i++) {
-        // Hide all steps
-        steps[i].style.display = 'none';
-    }
-    // Show the current step
-    steps[step - 1].style.display = 'block';
+function showStep(step) {
+var steps = document.getElementsByClassName('form-step');
+for (var i = 0; i < steps.length; i++) {
+// Hide all steps
+steps[i].style.display = 'none';
+}
+// Show the current step
+steps[step - 1].style.display = 'block';
 }
 
 // Initialize the form to show the first step

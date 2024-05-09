@@ -99,9 +99,6 @@
 							</video>
 							
 						</div>
-
-
-
 						<div class="image-container img-four">
 							<img src="/images/22.jpg" alt="cycling" />
 							<div class="overlay">

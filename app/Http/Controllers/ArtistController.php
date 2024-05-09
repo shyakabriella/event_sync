@@ -81,7 +81,7 @@ class ArtistController extends Controller
             }
             $validatedData['image'] = $request->file('image')->store('artists', 'public');
         } else {
-            unset($validatedData['image']); // Exclude image from update if not present
+            unset($validatedData['image']); 
         }
 
         $artist->update($validatedData);

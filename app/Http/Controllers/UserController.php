@@ -9,8 +9,6 @@ use Hash;
 
 use Illuminate\Support\Arr;
 
-    
-
 class UserController extends Controller
 
 {
@@ -21,9 +19,7 @@ class UserController extends Controller
     {
 
         $data = User::orderBy('id','DESC')->paginate(5);
-
         return view('users.index',compact('data'))
-
             ->with('i', ($request->input('page', 1) - 1) * 5);
 
     }
@@ -50,12 +46,8 @@ class UserController extends Controller
          $input['password'] = Hash::make($input['password']);
      
          $user = User::create($input);
-         
-         // Fetch the role using the ID, then get the name to assign it
-         // If 'roles' is an array (from a multi-select, for example), use Role::whereIn('id', $request->roles)->get();
-         $role = Role::where('id', $request->roles)->firstOrFail(); // Assuming 'roles' contains a single role ID
-     
-         // Now assign the role to the user using the role name
+        
+         $role = Role::where('id', $request->roles)->firstOrFail(); 
          $user->assignRole($role->name);
      
          return redirect()->route('users.index')

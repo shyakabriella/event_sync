@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request; // Make sure to include this
+use Illuminate\Http\Request; 
 
 class LoginController extends Controller
 {
@@ -26,18 +26,21 @@ class LoginController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function authenticated(Request $request, $user)
-    {
-        if ($user->hasRole('Event Organizer')) {
-            // Ensure this path matches exactly what's defined in your routes.
-            return redirect('/dashboard/event-organizer');
-        } elseif ($user->hasRole('Artist and Performer')) {
-            // Adjusted the path to match the route definition
-            return redirect('/dashboard/artist');
-        } elseif ($user->hasRole('Venue Owner/Manager')) {
-            // Ensure this path matches exactly what's defined in your routes.
-            return redirect('/dashboard/venue-owner');
-        }
+{
+    // Convert roles collection to array
+    \Log::info('Roles: ', ['roles' => $user->roles->pluck('name')->toArray()]);
 
-        return redirect('/home');
+    if ($user->hasRole('Event Organizer')) {
+        return redirect('/dashboard/event-organizer');
+    } elseif ($user->hasRole('Artist and Performer')) {
+        return redirect('/dashboard/artist');
+    } elseif ($user->hasRole('Venue Owner/Manager')) {
+        return redirect('/dashboard/venue-owner');
     }
+
+    // Default redirect if no roles matched
+    return redirect('/home');
+}
+
+    
 }

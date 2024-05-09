@@ -26,7 +26,7 @@ class BookingController extends Controller
     public function showBookingForm($eventId)
 {
     $event = Event::findOrFail($eventId);
-    $ticket = Ticket::where('event_id', $eventId)->first(); // Example of retrieving ticket data
+    $ticket = Ticket::where('event_id', $eventId)->first(); 
     return view('bookings.booking-form', compact('event', 'ticket'));
 }
 
