@@ -31,6 +31,9 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    Barryvdh\DomPDF\ServiceProvider::class,
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
@@ -43,6 +46,13 @@ return [
     */
 
     'debug' => (bool) env('APP_DEBUG', false),
+
+    'PDF' => Barryvdh\DomPDF\Facade::class,
+
+    Maatwebsite\Excel\ExcelServiceProvider::class,
+    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -169,6 +179,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        
     ])->toArray(),
 
     /*
@@ -184,6 +196,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

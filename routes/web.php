@@ -113,3 +113,5 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+Route::get('download-pdf', [ReportController::class, 'downloadPDF'])->name('download.pdf');
+Route::get('download-excel', [ReportController::class, 'downloadExcel'])->name('download.excel');

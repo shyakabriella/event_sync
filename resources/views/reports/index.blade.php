@@ -182,7 +182,6 @@
 						</div>
 					</div>
 
-                    <h1>heel</h1>
 <style>
  body {
 	margin: 2em;
@@ -227,7 +226,9 @@ p {
  </style>
 
 <p>Event_Sync_Report</p>
-<a class="btn btn-success" style="float:left;margin-right:20px;" href="" target="_blank">#</a>
+<a class="btn btn-success" style="float:left;margin-right:20px;" href="{{ route('download.pdf') }}" target="_blank">Download PDF</a>
+<a class="btn btn-success" style="float:left;margin-right:20px;" href="{{ route('download.excel') }}" target="_blank">Download Excel</a>
+
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead class="black-header">
         <tr>
