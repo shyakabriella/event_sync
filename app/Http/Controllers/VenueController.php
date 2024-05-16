@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Venue;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
-use App\Models\VenueRequest;
 
 
 class VenueController extends Controller
@@ -28,30 +32,50 @@ class VenueController extends Controller
     }
 
     public function store(Request $request): RedirectResponse
-{
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'location' => 'required|string',
-        'capacity' => 'nullable|integer',
-        'contact_info' => 'nullable|string',
-        'description' => 'nullable|string',
-        'type' => 'nullable|string',
-        'amenities' => 'nullable|string',
-        'images' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'booking_policy' => 'nullable|string',
-        'availability_start' => 'nullable|date',
-        'availability_end' => 'nullable|date|after_or_equal:availability_start',
-    ]);
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'required|string',
+            'capacity' => 'nullable|integer',
+            'contact_info' => 'nullable|string',
+            'email' => 'required|email|unique:users,email|unique:venues,email',
+            'type' => 'nullable|string',
+            'amenities' => 'nullable|string',
+            'images' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-   
-    if ($request->hasFile('images')) {
-        $validated['images'] = $request->file('images')->store('venues/images', 'public');
+        if ($request->hasFile('images')) {
+            $validated['images'] = $request->file('images')->store('venues/images', 'public');
+        }
+
+        // Create the venue
+        $venue = Venue::create($validated);
+
+        // Generate a random password
+        $password = \Str::random(10);
+        $hashedPassword = Hash::make($password);
+
+        // Create a user account for the venue
+        $user = new User();
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->password = $hashedPassword;
+        $user->role = 2;  // Assuming 2 is the code for 'Venue Owner'
+        $user->save();
+
+        // Send email with credentials
+        Mail::send('emails.credentials', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $password
+        ], function ($message) use ($user) {
+            $message->to($user->email, $user->name)
+                    ->subject('Your New Venue Account Credentials');
+        });
+
+        return redirect()->route('venues.index')->with('success', 'Venue created successfully and user account generated.');
     }
 
-    Venue::create($validated);
-
-    return redirect()->route('venues.index')->with('success', 'Venue created successfully.');
-}
 
     public function show(Venue $venue): View
     {

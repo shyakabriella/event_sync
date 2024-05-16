@@ -8,9 +8,6 @@ use App\Models\Artist;
 use App\Models\Booking;
 use App\Models\VenueRequest; 
 
-
-
-
 class DashboardController extends Controller
 {
     public function eventOrganizer()

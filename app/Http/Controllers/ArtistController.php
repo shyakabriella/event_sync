@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Artist;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Artist;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\View\View;
 
 class ArtistController extends Controller
@@ -23,33 +28,48 @@ class ArtistController extends Controller
     }
 
     public function store(Request $request): RedirectResponse
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:artists,email',
-            'genre' => 'nullable|string',
-            'contact_info' => 'nullable|string',
-            'image' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'performance_requirements' => 'nullable|string',
-            // Assuming 'availability' and 'past_performances' are dates or comma-separated dates
-            'availability' => 'nullable|string',
-            'past_performances' => 'nullable|string',
-        ]);
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:artists,email|unique:users,email',
+        'genre' => 'nullable|string',
+        'contact_info' => 'nullable|string',
+        'image' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'performance_requirements' => 'nullable|string',
+        'availability' => 'nullable|string',
+        'past_performances' => 'nullable|string',
+    ]);
 
-        // Handle the image upload if the image is present
-        if ($request->hasFile('image')) {
-            $validatedData['image'] = $request->file('image')->store('artists', 'public');
-        }
-
-        // Convert dates to JSON or another preferred format if necessary
-        // Example for converting a comma-separated list of dates to an array
-        // $validatedData['availability'] = explode(',', $validatedData['availability']);
-        // $validatedData['past_performances'] = explode(',', $validatedData['past_performances']);
-
-        Artist::create($validatedData);
-
-        return redirect()->route('artists.index')->with('success', 'Artist created successfully.');
+    if ($request->hasFile('image')) {
+        $validatedData['image'] = $request->file('image')->store('artists', 'public');
     }
+
+    $password = \Str::random(10); 
+    $hashedPassword = Hash::make($password); 
+
+    $validatedData['password'] = $hashedPassword;
+    $artist = Artist::create($validatedData);
+    
+    $user = new \App\Models\User();
+    $user->name = $validatedData['name'];
+    $user->email = $validatedData['email'];
+    $user->password = $hashedPassword;
+    $user->role = 1; 
+    $user->save();
+
+    Mail::send('emails.credentials', [
+        'name' => $user->name, 
+        'email' => $user->email, 
+        'password' => $password  
+    ], function ($message) use ($user) {
+        $message->to($user->email, $user->name)
+                ->subject('Your New Artist Account Credentials');
+    });
+
+    Auth::login($user); 
+    return redirect('/dashboard/artist')->with('success', 'Artist created successfully and logged in.');
+}
+
 
     public function show(Artist $artist): View
     {
@@ -74,7 +94,6 @@ class ArtistController extends Controller
             'past_performances' => 'nullable|string',
         ]);
 
-        // Image update logic
         if ($request->hasFile('image')) {
             if ($artist->image) {
                 Storage::delete('public/' . $artist->image);

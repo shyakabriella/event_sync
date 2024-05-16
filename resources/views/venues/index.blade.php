@@ -249,6 +249,12 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>Email:</strong>
+                    {!! Form::email('email', null, ['placeholder' => 'Email', 'class' => 'form-control', 'required']) !!}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
                     <strong>Location:</strong>
                     {!! Form::text('location', null, ['placeholder' => 'Location', 'class' => 'form-control', 'required']) !!}
                 </div>
@@ -265,66 +271,47 @@
                     {!! Form::text('contact_info', null, ['placeholder' => 'Contact Info', 'class' => 'form-control']) !!}
                 </div>
             </div>
-            
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Type:</strong>
-                {!! Form::select('type', [
-                    '' => 'Select a Venue Type',
-                    'concert_hall' => 'Concert Hall',
-                    'theater' => 'Theater',
-                    'conference_center' => 'Conference Center',
-                    'banquet_hall' => 'Banquet Hall',
-                    'sports_arena' => 'Sports Arena',
-                    'club_lounge' => 'Club or Lounge',
-                    'art_gallery_museum' => 'Art Gallery or Museum',
-                    'outdoor_park_garden' => 'Outdoor Park or Garden',
-                    'hotel_ballroom' => 'Hotel Ballroom',
-                    'convention_hall' => 'Convention Hall',
-                    'academic_venues' => 'Academic Venues',
-                    'rooftop' => 'Rooftop',
-                    'brewery_winery' => 'Brewery or Winery',
-                    'barn_farm' => 'Barn or Farm',
-                    'historic_sites' => 'Historic Sites',
-                ], null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Availability Start:</strong>
-                {!! Form::date('availability_start', null, ['placeholder' => 'Start Date', 'class' => 'form-control']) !!}
-            </div>
-            </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Availability End:</strong>
-                    {!! Form::date('availability_end', null, ['placeholder' => 'End Date', 'class' => 'form-control']) !!}
+                    <strong>Type:</strong>
+                    {!! Form::select('type', [
+                        '' => 'Select a Venue Type',
+                        'concert_hall' => 'Concert Hall',
+                        'theater' => 'Theater',
+                        'conference_center' => 'Conference Center',
+                        'banquet_hall' => 'Banquet Hall',
+                        'sports_arena' => 'Sports Arena',
+                        'club_lounge' => 'Club or Lounge',
+                        'art_gallery_museum' => 'Art Gallery or Museum',
+                        'outdoor_park_garden' => 'Outdoor Park or Garden',
+                        'hotel_ballroom' => 'Hotel Ballroom',
+                        'convention_hall' => 'Convention Hall',
+                        'academic_venues' => 'Academic Venues',
+                        'rooftop' => 'Rooftop',
+                        'brewery_winery' => 'Brewery or Winery',
+                        'barn_farm' => 'Barn or Farm',
+                        'historic_sites' => 'Historic Sites',
+                    ], null, ['class' => 'form-control']) !!}
                 </div>
             </div>
-
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Booking Policy:</strong>
-                    {!! Form::textarea('booking_policy', null, ['placeholder' => 'Booking Policy', 'class' => 'form-control']) !!}
-                </div>
-            </div>
-            
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Description:</strong>
-                    {!! Form::textarea('description', null, ['placeholder' => 'Description', 'class' => 'form-control']) !!}
-                </div>
-            </div>
-
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Amenities:</strong>
                     {!! Form::textarea('amenities', null, ['placeholder' => 'Amenities', 'class' => 'form-control']) !!}
                 </div>
             </div>
-
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Availability Start:</strong>
+                    {!! Form::date('availability_start', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div the="form-group">
+                    <strong>Availability End:</strong>
+                    {!! Form::date('availability_end', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Image:</strong>
@@ -332,7 +319,6 @@
                     <small class="form-text text-muted">Allowed types: jpeg, png, jpg, gif, svg. Max size: 2MB</small>
                 </div>
             </div>
-
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -341,14 +327,11 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
-
-
+            @endif
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
-
         {!! Form::close() !!}
       </div>
       <div class="modal-footer">
@@ -357,6 +340,7 @@
     </div>
   </div>
 </div>
+
       	
 		</div>
 			<div class="right-content">

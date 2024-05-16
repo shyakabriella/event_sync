@@ -18,40 +18,47 @@ class BookingController extends Controller
         $venues = Venue::latest()->paginate(10);
         $bookings = Booking::latest()->paginate(10);
         $events = Event::latest()->paginate(10);
-        $venueRequests = VenueRequest::latest()->paginate(10); // Fetch venue requests
+        $venueRequests = VenueRequest::latest()->paginate(10); 
 
         return view('bookings.index', compact('venues', 'bookings', 'events', 'venueRequests'));
     }
 
     public function showBookingForm($eventId)
+    {
+        $event = Event::findOrFail($eventId);
+        $ticket = Ticket::where('event_id', $eventId)->first(); // Ensure there is a ticket
+    
+        // Handle the case where there might not be a ticket available
+        if (!$ticket) {
+            return redirect()->back()->withErrors('No tickets available for this event.');
+        }
+    
+        return view('bookings.booking-form', compact('event', 'ticket'));
+    }
+    
+    public function submitBooking(Request $request)
 {
-    $event = Event::findOrFail($eventId);
-    $ticket = Ticket::where('event_id', $eventId)->first(); 
-    return view('bookings.booking-form', compact('event', 'ticket'));
+    $request->validate([
+        'event_id' => 'required|exists:events,id',
+        'name' => 'required|string',
+        'phone_number' => 'required|string',
+        'email' => 'required|email',
+        'national_id' => 'required|string',
+        'province' => 'required|string',
+        'district' => 'required|string',
+        'sector' => 'required|string',
+        'num_tickets' => 'required|integer|min:1',
+        'payment_option' => 'required|string',
+    ]);
+
+    $reservation = Reservation::create($request->all());
+    
+    return redirect()->route('bookings.payment', ['eventId' => $request->event_id])->with('reservation', $reservation);
 }
 
-        public function submitBooking(Request $request)
-        {
-            // Validate the form data
-            $request->validate([
-                'event_id' => 'required|exists:events,id',
-                'name' => 'required|string',
-                'phone_number' => 'required|string',
-                'email' => 'required|email',
-                'national_id' => 'required|string',
-                'province' => 'required|string',
-                'district' => 'required|string',
-                'sector' => 'required|string',
-                'num_tickets' => 'required|integer|min:1',
-                'payment_option' => 'required|string',
-            ]);
-            $reservation = Reservation::create($request->all());
+
+
         
-            
-            $event = Event::findOrFail($request->event_id);
-            // Redirect to the payment page with event details
-            return redirect()->route('bookings.payment')->with('reservation', $reservation);
-        }
         
 
         

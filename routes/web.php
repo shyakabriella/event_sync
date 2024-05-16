@@ -18,6 +18,8 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\VenueRequestController;
+use App\Http\Controllers\ReportController;
+use App\Models\Event;
 
 
   
@@ -69,10 +71,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/venue-requests/{id}/update-status', [VenueRequestController::class, 'updateStatus'])->name('venue-requests.update-status');
     Route::get('/book-seat/{eventId}', [BookingController::class, 'showBookingForm'])->name('book-seat');
     Route::post('/submit-booking', [BookingController::class, 'submitBooking'])->name('submit-booking');
-    Route::get('/bookings/payment', function () {
-      
+   
+    Route::get('/bookings/payment/{eventId}', function ($eventId) {
+        $event = Event::findOrFail($eventId);
         return view('bookings.payment', compact('event'));
     })->name('bookings.payment');
+    
     
 
     Route::post('/submit-booking', [BookingController::class, 'submitBooking'])->name('submit-booking');
@@ -103,3 +107,9 @@ Route::delete('/invitations/{invitation}', [InvitationController::class, 'destro
 
 
 });
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard/artist', [DashboardController::class, 'artist'])->name('dashboard.artist');
+});
+
+Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');

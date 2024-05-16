@@ -181,71 +181,130 @@
 							</div>
 						</div>
 					</div>
-				</div>
 
+                    <h1>heel</h1>
+<style>
+ body {
+	margin: 2em;
+}
 
-				<div class="left-bottom">
-					<div class="weekly-schedule">
-						<h1>Event List</h1>
-						<div class="calendar">
-						@foreach ($events as $event)
-						<div class="day-and-activity activity-one">
-						<div class="day">
-							<h1>{{ \Carbon\Carbon::parse($event->date)->format('d') }}</h1>
-							<p>{{ \Carbon\Carbon::parse($event->date)->format('D') }}</p>
-						</div>
-						<div class="activity">
-							<h2>{{ $event->name }}</h2>
-							<div class="participants">
-							<img src="{{ asset('images/homepage/' . $event->image) }}" alt="Event Image">
-							</div>                                  
-						</div>
-						<div class="event-actions">
-							
-							<button class="btn">Publish</button>
-							<div style="display: flex; flex-direction: column; align-items: center; margin-top: 5px;">
-								<a href="javascript:void(0)" onclick="editEvent({{ $event->toJson() }})" title="Edit">
-									<i class="fas fa-edit" style="color: #007bff; cursor: pointer;"></i>
-								</a>
+.table-bordered.card {
+	border: 0 !important;
+}
+.card thead {
+	display: none;
+}
 
-								<script>
-									function editEvent(eventData) {
-										document.getElementById('eventName').value = eventData.name;
-										document.getElementById('eventDate').value = formatDateForInput(eventData.date);
-										document.getElementById('eventLocation').value = eventData.location;
-										document.getElementById('eventCapacity').value = eventData.capacity;
-										document.getElementById('eventType').value = eventData.event_type;
-										document.getElementById('eventDescription').value = eventData.description;
-										document.getElementById('multiStepForm').setAttribute('action', `/events/${eventData.id}?_method=PUT`);
-										var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-										myModal.show();
-									}
+.card tbody tr {
+	float: left;
+	width: 25em;
+	margin: 0.5em;
+	border: 1px solid #bfbfbf;
+	border-radius: 0.5em;
+	background-color: transparent !important;
+	box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+}
+.card tbody tr td {
+	display: block;
+	border: 0;
+}
 
-									function formatDateForInput(dateString) {
-										const date = new Date(dateString);
-										const formatted = date.toISOString().slice(0, 16); 
-										return formatted;
-									}
+p {
+	text-align: center;
+	color: limegreen;
+	font-size: 1.5em;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px #000;
+	margin-bottom: 1.2em;
+}
 
-								</script>
-								<form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display: inline;">
-									@csrf
-									@method('DELETE')
-									<button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;" onclick="return confirm('Are you sure?')">
-										<i class="fas fa-trash" style="color: red;"></i>
-									</button>
-								</form>
-							</div>
-						</div>
-					</div>
+.black-header th {
+    color: white;
+    background-color: black;
+    padding: 8px;
+    text-align: left;
+}
+ </style>
 
-				@endforeach			
-			</div>
+<p>Event_Sync_Report</p>
+<a class="btn btn-success" style="float:left;margin-right:20px;" href="" target="_blank">#</a>
+<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead class="black-header">
+        <tr>
+            <th>Events</th>
+            <th>Artist</th>
+            <th>Venues</th>
+            <th>Attendee Number</th>
+            <th>Date of Event</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($events as $event)
+        <tr>
+            <td>{{ $event->name }}</td>
+            <td>
+                @foreach ($event->artists as $artist)
+                    {{ $artist->name }}<br>
+                @endforeach
+            </td>
+            <td>{{ $event->location }}</td>
+            <td>{{ $event->tickets->sum('quantity') }}</td>
+            <td>{{ $event->date }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+        </div>	
+            </div>
 
-						<div class="pagination-wrapper">
-							{{ $events->links('pagination::bootstrap-5') }} {{-- Use this for Bootstrap 5 --}}
-						</div>
-					</div>
+<script>
+    $(document).ready(function () {
+	//Only needed for the filename of export files.
+	//Normally set in the title tag of your page.
+	document.title = "Card View DataTable";
+	// DataTable initialisation
+	$("#example").DataTable({
+		dom: '<"dt-buttons"Bf><"clear">lirtp',
+		paging: true,
+		autoWidth: true,
+		buttons: [
+			"colvis",
+			"copyHtml5",
+			"csvHtml5",
+			"excelHtml5",
+			"pdfHtml5",
+			"print"
+		],
+		initComplete: function (settings, json) {
+			$(".dt-buttons .btn-group").append(
+				'<a id="cv" class="btn btn-primary" href="#">CARD VIEW</a>'
+			);
+			$("#cv").on("click", function () {
+				if ($("#example").hasClass("card")) {
+					$(".colHeader").remove();
+				} else {
+					var labels = [];
+					$("#example thead th").each(function () {
+						labels.push($(this).text());
+					});
+					$("#example tbody tr").each(function () {
+						$(this)
+							.find("td")
+							.each(function (column) {
+								$("<span class='colHeader'>" + labels[column] + ":</span>").prependTo(
+									$(this)
+								);
+							});
+					});
+				}
+				$("#example").toggleClass("card");
+			});
+		}
+	});
+});
+
+                       
+</script>
 
 					<div class="personal-bests">
 						<h1>Personal Bests</h1>
@@ -312,45 +371,6 @@
 				</div>
 
 
-				<div class="friends-activity">
-					<h1>Friends Activity</h1>
-					<div class="card-container">
-						<div class="card">
-						<h1>Requested Venue</h1>
-
-						<div class="calendar">
-							@foreach($venueRequests as $request)
-								<div class="day-and-activity activity-one">
-									<div class="day">
-										<h1>{{ $request->created_at->format('d') }}</h1>
-										<p>{{ $request->created_at->format('D') }}</p>
-									</div>
-									<div class="activity">
-									<h2>
-										@if($request->venue)
-											<a href="{{ route('venues.show', $request->venue->id) }}">
-												{{ $request->venue->name }}
-											</a>
-										@else
-											<a href="{{ route('venues.show', 1) }}">
-												Venue Name
-											</a>
-										@endif
-									</h2>
-									<div class="status">
-										@if($request->status == 'approved')
-											<span class="badge badge-success">Approved</span>
-										@else
-											<span class="badge badge-warning">Pending</span>
-										@endif
-									</div>
-								</div>
-							</div>
-						@endforeach
-					</div>
-
-					</div>
-				</div>
 			</div>
 		</section>
 	</main>

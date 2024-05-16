@@ -360,7 +360,7 @@
 					</div>
 				</div>
 
-				<div class="friends-activity">
+				<!-- <div class="friends-activity">
 					<h1>Friends Activity</h1>
 					<div class="card-container">
 						<div class="card">
@@ -370,16 +370,17 @@
 							</div>
 							<img class="card-img" src="" alt="" />
 							<p>We completed the 30-Day Running Streak Challenge!🏃‍♀️🎉</p>
-						</div>
+						</div> -->
 
-						<div class="card card-two">
+						<!-- <div class="card card-two">
 							<div class="card-user-info">
 								<img src="" alt="" />
 								<h2>Mike</h2>
 							</div>
 							<img class="card-img" src="" alt="" />
 							<p>I just set a new record in cycling: 30 miles!💪</p>
-						</div>
+						</div> -->
+
 					</div>
 				</div>
 			</div>

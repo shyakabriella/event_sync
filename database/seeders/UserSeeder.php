@@ -1,38 +1,34 @@
 <?php
-namespace Database\Seeders;
 
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
     public function run()
     {
-        $this->call(RoleSeeder::class);
-        $eventOrganizer = User::create([
+        User::create([
             'name' => 'Event Organizer',
             'email' => 'eventorganizer@example.com',
-            'password' => Hash::make('password'), 
+            'password' => Hash::make('password'),
+            'role' => User::ROLE_EVENT_ORGANIZER, 
         ]);
-        $eventOrganizer->assignRole('Event Organizer');
 
-        $artistPerformer = User::create([
+        User::create([
             'name' => 'Artist and Performer',
             'email' => 'artistperformer@example.com',
-            'password' => Hash::make('password'), 
+            'password' => Hash::make('password'),
+            'role' => User::ROLE_ARTIST, 
         ]);
-        
-        $artistPerformer->assignRole('Artist and Performer');
 
-        $venueOwner = User::create([
+        User::create([
             'name' => 'Venue Owner/Manager',
             'email' => 'venueowner@example.com',
-            'password' => Hash::make('password'), 
+            'password' => Hash::make('password'),
+            'role' => User::ROLE_VENUE_OWNER, 
         ]);
-        $venueOwner->assignRole('Venue Owner/Manager');
     }
 }
-
