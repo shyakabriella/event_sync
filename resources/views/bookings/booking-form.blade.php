@@ -200,7 +200,7 @@
 					<p>Event name: {{ $event->name }}</p>
 					<p>event_Type: {{ $event->event_type }}</p>
 					<div class="ticket-info">
-						<p class="card-text">Price: <span id="ticketPrice">{{ number_format($ticket->price, 2) }}</span> Rwf</p>
+						<p class="card-text">Price: <span id="ticketPrice">{{ number_format($ticket->price) }}</span> Rwf</p>
 						<p class="card-text">Available Seats: {{ $ticket->quantity }}</p>
 						<label for="num_tickets">Number of Tickets:</label>
 						<input type="number" id="num_tickets" name="num_tickets" min="1" max="{{ $ticket->quantity }}" required onchange="calculateTotal()">
@@ -269,7 +269,7 @@ function calculateTotal() {
 var ticketPrice = parseFloat(document.getElementById('ticketPrice').textContent);
 var numTickets = parseInt(document.getElementById('num_tickets').value);
 var totalAmount = ticketPrice * numTickets;
-document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+document.getElementById('totalAmount').textContent = totalAmount.toFixed(3);
 }
 
 </script>

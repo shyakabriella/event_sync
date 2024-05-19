@@ -215,9 +215,9 @@
                                         <div class="card mb-2 me-2" onclick="handleTicketClick('{{ $ticket['seat_type'] }}')">
                                             <div class="card-body">
                                                 <h6 class="card-title">{{ $ticket['seat_type'] }}</h6>
-                                                <p class="card-text">Price: {{ number_format($ticket['price'], 2) }} Rwf</p>
+                                                <p class="card-text">Price: {{ number_format($ticket['price']) }} Rwf</p>
                                                 <p class="card-text">Available Seats: {{ $ticket['quantity'] }}</p>
-                                                <p class="card-text">Total Amount: {{ number_format($ticket['price'] * $ticket['quantity'], 2) }} Rwf</p>
+                                                <p class="card-text">Total Amount: {{ number_format($ticket['price'] * $ticket['quantity']) }} Rwf</p>
                                             </div>
                                         </div>
                                     @endforeach
