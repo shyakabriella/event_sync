@@ -92,8 +92,8 @@
           </div>
           
           <div class="mb-3">
-            <label for="ticketPrice" class="form-label">Ticket Price (Rwf):</label>
-            <input type="number" class="form-control" id="ticketPrice" name="price" step="0.01" required>
+            <label for="" class="form-label">Ticket Price (Rwf):</label>
+            <input type="number" class="form-control" id="ticketPrice" name="price" required>
           </div>
           
           <div class="mb-3">

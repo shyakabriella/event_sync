@@ -26,7 +26,7 @@
     </li>
     
     <!-- Event Organizers -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a href="{{ route('events.create') }}">
             <i class="fa fa-plus-square nav-icon"></i>
             <span class="nav-text">Create Event</span>
@@ -43,7 +43,7 @@
             <i class="fa fa-microphone nav-icon"></i>
             <span class="nav-text">ArtManagement</span>
         </a>
-    </li>
+    </li> -->
    
 
   
