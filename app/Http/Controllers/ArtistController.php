@@ -67,7 +67,7 @@ class ArtistController extends Controller
     });
 
     Auth::login($user); 
-    return redirect('/dashboard/artist')->with('success', 'Artist created successfully and logged in.');
+    return redirect()->back()->with('success', 'Artist added successfully!');
 }
 
 

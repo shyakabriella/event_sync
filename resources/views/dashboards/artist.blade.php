@@ -165,7 +165,7 @@
                     <th>Location</th>
                     <th>Artist</th>
                     <th>Date</th>
-                    <th>Action</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -181,7 +181,7 @@
                         </td>
                         <td>{{ $event->date }}</td>
                         <td class="action-buttons">
-                            <button class="approve">Join</button>
+                            <button class="approve">requested</button>
                         </td>
                     </tr>
                 @endforeach

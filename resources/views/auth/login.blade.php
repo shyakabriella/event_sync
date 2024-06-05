@@ -36,10 +36,10 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-            <div class="terms">
+            <!-- <div class="terms">
                 <input type="checkbox" id="terms">
                 <label for="terms">I've read and agree to Terms & Conditions</label>
-            </div>
+            </div> -->
             <button type="submit">LOGIN</button>
         </form>
         <p>Already registered? <a href="/register">register here</a></p>

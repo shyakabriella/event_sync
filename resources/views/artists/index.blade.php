@@ -188,9 +188,9 @@
             <th style="color:black">Genre</th>
             <th style="color:black">Contact</th>
             <th style="color:black">Image</th>
-            <th style="color:black">Requirements</th>
+            <!-- <th style="color:black">Requirements</th>
             <th style="color:black">Availability</th>
-            <th style="color:black">Past Performances</th>
+            <th style="color:black">Past Performances</th> -->
         </tr>
     </thead>
     <tbody>
@@ -204,9 +204,9 @@
                 <img src="{{ asset('storage/' . $artist->image) }}" alt="Artist Image" style="width: 60px; height: auto;">
                 @endif
             </td>
-            <td>{{ $artist->performance_requirements }}</td>
+            <!-- <td>{{ $artist->performance_requirements }}</td>
             <td>{{ $artist->availability }}</td>
-            <td>{{ $artist->past_performances }}</td>
+            <td>{{ $artist->past_performances }}</td> -->
         </tr>
         @endforeach
      </tbody>
@@ -278,7 +278,7 @@
     </div>
 
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
+    <!-- <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Availability:</strong>
             {!! Form::date('availability', null, ['placeholder' => 'Availability', 'class' => 'form-control']) !!}
@@ -298,7 +298,7 @@
             <strong>Performance Requirements:</strong>
             {!! Form::textarea('performance_requirements', null, ['placeholder' => 'Performance Requirements', 'class' => 'form-control']) !!}
         </div>
-    </div>
+    </div> -->
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>

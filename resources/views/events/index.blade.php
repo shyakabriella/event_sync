@@ -206,7 +206,7 @@
                         <th style="color:black;">Location</th>
                         <th style="color:black;">Add_Artist</th>
                         <th style="color:black;">Date</th>
-                        <th style="color:black;">Action</th>
+                        <!-- <th style="color:black;">Action</th> -->
                     </tr>
                 </thead>
             <tbody>
@@ -229,14 +229,14 @@
 
                 
             <td>{{ $event->date }}</td>
-            <td>
+            <!-- <td>
                 <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary">Publish</a>
                 <!-- <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form> -->
-            </td>
+            </td> -->
         </tr>
         @endforeach
 

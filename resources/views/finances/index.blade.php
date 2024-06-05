@@ -240,7 +240,7 @@
 				</div>
 
 				<div class="active-calories">
-					<h1 style="align-self: flex-start">Active Calories</h1>
+					<!-- <h1 style="align-self: flex-start">Active Calories</h1> -->
 					<div class="active-calories-container">
 						<div class="box" style="--i: 85%">
 							<div class="circle">
@@ -259,15 +259,15 @@
 					<h1>Personal Bests</h1>
 					<div class="personal-bests-container">
 						<div class="best-item box-one">
-							<p>Fastest 5K Run: 22min</p>
+							<!-- <p>Fastest 5K Run: 22min</p> -->
 							<img src="" alt="" />
 						</div>
 						<div class="best-item box-two">
-							<p>Longest Distance Cycling: 4 miles</p>
+							<!-- <p>Longest Distance Cycling: 4 miles</p> -->
 							<img src="" alt="" />
 						</div>
 						<div class="best-item box-three">
-							<p>Longest Roller-Skating: 2 hours</p>
+							<!-- <p>Longest Roller-Skating: 2 hours</p> -->
 							<img src="" alt="" />
 						</div>
 					</div>
@@ -276,23 +276,9 @@
 				<div class="friends-activity">
 					<h1>Friends Activity</h1>
 					<div class="card-container">
-						<div class="card">
-							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Jane</h2>
-							</div>
-							<img class="card-img" src="" alt="" />
-							<p>We completed the 30-Day Running Streak Challenge!🏃‍♀️🎉</p>
-						</div>
+						
 
-						<div class="card card-two">
-							<div class="card-user-info">
-								<img src="" alt="" />
-								<h2>Mike</h2>
-							</div>
-							<img class="card-img" src="" alt="" />
-							<p>I just set a new record in cycling: 30 miles!💪</p>
-						</div>
+						
 					</div>
 				</div>
 			</div>
